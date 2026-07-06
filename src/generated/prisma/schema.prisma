@@ -1,0 +1,209 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+/// 分类管理 - 支持一级和二级分类
+model Category {
+  id        String     @id @default(cuid())
+  name      String
+  level     Int        @default(1)
+  topLevel  String
+  sortOrder Int        @default(0)
+  collapsed Boolean    @default(false)
+  color     String?
+  icon      String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  parentId  String?
+  parent    Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children  Category[] @relation("CategoryHierarchy")
+  tasks     Task[]
+
+  @@index([topLevel])
+  @@index([parentId])
+  @@map("categories")
+}
+
+/// 标签
+model Tag {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  color     String    @default("#6B7280")
+  createdAt DateTime  @default(now())
+  taskTags  TaskTag[]
+
+  @@map("tags")
+}
+
+/// 任务-标签关联表（多对多）
+model TaskTag {
+  id        String   @id @default(cuid())
+  taskId    String
+  tagId     String
+  createdAt DateTime @default(now())
+  tag       Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  task      Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@unique([taskId, tagId])
+  @@index([tagId])
+  @@map("task_tags")
+}
+
+/// 事项管理 - 核心任务模型
+model Task {
+  id            String         @id @default(cuid())
+  title         String
+  description   String?
+  status        TaskStatus     @default(TODO)
+  categoryId    String?
+  parentId      String?
+  startDate     DateTime?
+  dueDate       DateTime?
+  completedAt   DateTime?
+  npc           String?
+  notes         String?
+  towerLink     String?
+  sortOrder     Int            @default(0)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  ledgerItems   LedgerTask[]
+  recurringTask RecurringTask?
+  reminders     Reminder[]
+  taskTags      TaskTag[]
+  parent        Task?          @relation("TaskHierarchy", fields: [parentId], references: [id])
+  children      Task[]         @relation("TaskHierarchy")
+  category      Category?      @relation(fields: [categoryId], references: [id])
+
+  @@index([status])
+  @@index([dueDate])
+  @@index([categoryId])
+  @@index([parentId])
+  @@index([completedAt])
+  @@map("tasks")
+}
+
+/// 周期任务配置
+model RecurringTask {
+  id               String             @id @default(cuid())
+  taskId           String             @unique
+  frequency        RecurringFrequency
+  interval         Int                @default(1)
+  weekDays         String?            @default("[]")
+  monthDate        Int?
+  monthWeekOrdinal Int?
+  monthWeekDay     Int?
+  yearMonth        Int?
+  yearDate         Int?
+  customDays       Int?
+  nextDueDate      DateTime?
+  endDate          DateTime?
+  lastCompletedAt  DateTime?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  task             Task               @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@map("recurring_tasks")
+}
+
+/// 家庭台账
+model Ledger {
+  id          String       @id @default(cuid())
+  type        LedgerType
+  name        String
+  description String?
+  details     String?
+  status      String       @default("active")
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  tasks       LedgerTask[]
+
+  @@index([type])
+  @@map("ledgers")
+}
+
+/// 任务与台账的关联表（多对多）
+model LedgerTask {
+  id        String   @id @default(cuid())
+  ledgerId  String
+  taskId    String
+  createdAt DateTime @default(now())
+  task      Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  ledger    Ledger   @relation(fields: [ledgerId], references: [id], onDelete: Cascade)
+
+  @@unique([ledgerId, taskId])
+  @@index([ledgerId])
+  @@index([taskId])
+  @@map("ledger_tasks")
+}
+
+/// 提醒
+model Reminder {
+  id         String         @id @default(cuid())
+  taskId     String
+  timing     ReminderTiming
+  remindAt   DateTime
+  isNotified Boolean        @default(false)
+  notifiedAt DateTime?
+  createdAt  DateTime       @default(now())
+  task       Task           @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@index([remindAt])
+  @@index([taskId])
+  @@map("reminders")
+}
+
+/// 系统设置
+model Setting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String?
+  updatedAt DateTime @updatedAt
+
+  @@map("settings")
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  COMPLETED
+  ARCHIVED
+  CANCELLED
+}
+
+enum RecurringFrequency {
+  DAILY
+  WEEKLY
+  MONTHLY_DATE
+  MONTHLY_DAY
+  YEARLY
+  CUSTOM
+}
+
+enum LedgerType {
+  FINANCIAL
+  LOAN
+  INSURANCE
+  MEMBERSHIP
+  VEHICLE
+  PROPERTY
+  RECHARGE_CARD
+  EQUIPMENT
+  LOST_ITEM
+  HEALTH
+  DOMAIN
+  OTHER
+}
+
+enum ReminderTiming {
+  ON_DAY
+  BEFORE_1_DAY
+  BEFORE_3_DAYS
+  BEFORE_7_DAYS
+  BEFORE_30_DAYS
+}
