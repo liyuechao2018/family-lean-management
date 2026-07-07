@@ -3,7 +3,9 @@ import type { NextRequest } from 'next/server';
 import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'change-this-secret-in-production';
-const PROTECTED_PREFIX = '/lean-management/';
+
+// 注意：basePath 模式下 middleware 的 pathname 不包含 basePath 前缀
+// Next.js 在调用 middleware 前已经剥离了 basePath
 
 function verifyToken(token: string) {
   try {
@@ -13,23 +15,18 @@ function verifyToken(token: string) {
   }
 }
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // 跳过鉴权的路径
+  // 跳过鉴权的路径（不含 basePath 前缀）
   const publicPaths = [
-    '/lean-management/login',
-    '/lean-management/register',
-    '/lean-management/api/auth/',
-    '/lean-management/_next/',
-    '/lean-management/favicon.ico',
+    '/login',
+    '/register',
+    '/api/auth/',
+    '/_next/',
+    '/favicon.ico',
   ];
   if (publicPaths.some(p => pathname.startsWith(p))) {
-    return NextResponse.next();
-  }
-
-  // 只保护 /lean-management 下的路由
-  if (!pathname.startsWith(PROTECTED_PREFIX)) {
     return NextResponse.next();
   }
 
@@ -44,5 +41,8 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/lean-management/:path*'],
+  matcher: [
+    // 排除静态资源，只拦截页面和 API 路由
+    '/((?!_next/static|_next/image|favicon.ico).*)',
+  ],
 };

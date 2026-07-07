@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function RegisterPage() {
@@ -12,7 +11,6 @@ export default function RegisterPage() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -41,8 +39,8 @@ export default function RegisterPage() {
       } else {
         setSuccess('注册成功！正在跳转...');
         setTimeout(() => {
-          router.push('/lean-management/tasks');
-          router.refresh();
+          // 强制刷新以确保 cookie 被 middleware 读取
+          window.location.href = '/lean-management/';
         }, 1000);
       }
     } catch {

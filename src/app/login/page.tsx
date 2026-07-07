@@ -26,8 +26,8 @@ export default function LoginPage() {
       if (!res.ok) {
         setError(data.error || '登录失败');
       } else {
-        router.push('/lean-management/tasks');
-        router.refresh();
+        // router.push 会自动添加 basePath，所以用 / 即可
+        window.location.href = '/lean-management/';
       }
     } catch {
       setError('网络错误，请重试');
