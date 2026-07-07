@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const navItems = [
   { href: "/", label: "总览", icon: "📊" },
@@ -15,9 +15,28 @@ const navItems = [
   { href: "/import", label: "数据导入", icon: "📥" },
 ];
 
+interface UserInfo {
+  id: string;
+  email: string;
+  name?: string;
+}
+
 export default function Sidebar() {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
+  const [user, setUser] = useState<UserInfo | null>(null);
+
+  useEffect(() => {
+    fetch('/lean-management/api/auth/me')
+      .then(res => res.json())
+      .then(data => { if (data.user) setUser(data.user); })
+      .catch(() => {});
+  }, []);
+
+  async function handleLogout() {
+    await fetch('/lean-management/api/auth/logout', { method: 'POST' });
+    window.location.href = '/lean-management/login';
+  }
 
   return (
     <aside
@@ -60,6 +79,18 @@ export default function Sidebar() {
           );
         })}
       </nav>
+
+      {!collapsed && user && (
+        <div className="p-3 border-t border-gray-200">
+          <div className="text-xs text-gray-500 truncate mb-1">{user.email}</div>
+          <button
+            onClick={handleLogout}
+            className="text-xs text-red-500 hover:underline"
+          >
+            退出登录
+          </button>
+        </div>
+      )}
 
       <div className="p-3 border-t border-gray-200 text-xs text-gray-400 text-center">
         {!collapsed && "v0.1 · Phase 1"}

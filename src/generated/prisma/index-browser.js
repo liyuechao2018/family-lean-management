@@ -218,6 +218,15 @@ exports.Prisma.SettingScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  password: 'password',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -276,7 +285,8 @@ exports.Prisma.ModelName = {
   Ledger: 'Ledger',
   LedgerTask: 'LedgerTask',
   Reminder: 'Reminder',
-  Setting: 'Setting'
+  Setting: 'Setting',
+  User: 'User'
 };
 
 /**
