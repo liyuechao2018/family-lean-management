@@ -48,8 +48,10 @@ export function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
+// 注意：basePath 模式下 matcher 不要包含 basePath 前缀
+// Next.js 会自动处理 basePath，否则会变成双重的 /lean-management/lean-management/...
 export const config = {
   matcher: [
-    '/lean-management/:path*',
+    '/:path*',
   ],
 };
