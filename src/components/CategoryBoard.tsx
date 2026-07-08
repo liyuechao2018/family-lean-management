@@ -1276,6 +1276,7 @@ function TaskRow({
   const isDragOver = dragOverId === task.id;
   const isEditingTitle = editing?.taskId === task.id && editing?.field === "title";
   const isCompleted = task.status === "COMPLETED";
+  const clickTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   return (
     <>
@@ -1469,15 +1470,26 @@ function TaskRow({
                       className="flex-1 px-1 py-0.5 text-sm border border-blue-400 rounded bg-blue-50 focus:outline-none focus:ring-1 focus:ring-blue-400"
                     />
                   ) : (
-                    <button
-                      onClick={() => onEditStart(task.id, "title", task.title)}
-                      className={`flex-1 text-left text-sm font-medium cursor-text truncate ${
+                    <span
+                      onClick={() => {
+                        if (clickTimer.current) clearTimeout(clickTimer.current);
+                        clickTimer.current = setTimeout(() => {
+                          onEditStart(task.id, "title", task.title);
+                        }, 300);
+                      }}
+                      onDoubleClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (clickTimer.current) clearTimeout(clickTimer.current);
+                        onTaskOpen(task.id);
+                      }}
+                      className={`flex-1 text-left text-sm font-medium cursor-pointer select-none truncate ${
                         isCompleted ? "text-gray-400 line-through" : "text-gray-900 hover:text-blue-600"
                       }`}
-                      title={task.title}
+                      title="双击查看详情，单击编辑"
                     >
                       {task.title}
-                    </button>
+                    </span>
                   )}
                   {task.recurringTask && (
                     <button
@@ -1507,7 +1519,9 @@ function TaskRow({
               <td key={col.id} className="px-3 py-2" style={colWidthStyle(col.width)}>
                 <button
                   onClick={() => col.editable && onEditStart(task.id, "status", task.status)}
-                  className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${statusColors[task.status]} cursor-text`}
+                  onDoubleClick={(e) => { e.preventDefault(); e.stopPropagation(); onTaskOpen(task.id); }}
+                  title="双击查看详情"
+                  className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${statusColors[task.status]} cursor-pointer`}
                 >
                   {statusLabels[task.status]}
                 </button>
@@ -1535,7 +1549,9 @@ function TaskRow({
               <td key={col.id} className="px-3 py-2" style={colWidthStyle(col.width)}>
                 <button
                   onClick={() => col.editable && onEditStart(task.id, "dueDate", task.dueDate ? formatDate(task.dueDate) : "")}
-                  className={`text-xs cursor-text ${overdueClass}`}
+                  onDoubleClick={(e) => { e.preventDefault(); e.stopPropagation(); onTaskOpen(task.id); }}
+                  title="双击查看详情"
+                  className={`text-xs cursor-pointer ${overdueClass}`}
                 >
                   {task.dueDate ? formatDate(task.dueDate) : "—"}
                 </button>
