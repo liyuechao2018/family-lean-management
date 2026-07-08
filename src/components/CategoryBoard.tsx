@@ -64,7 +64,7 @@ const statusColors: Record<TaskStatus, string> = {
 };
 
 const DEFAULT_COLUMNS: ColumnDef[] = [
-  { id: "done", name: "", width: 40, visible: true, editable: false, field: null, isCustom: false },
+  { id: "done", name: "", width: 48, visible: true, editable: false, field: null, isCustom: false },
   { id: "index", name: "编号", width: 50, visible: true, editable: false, field: null, isCustom: false },
   { id: "title", name: "任务", width: 220, visible: true, editable: true, field: "title", isCustom: false },
   { id: "status", name: "状态", width: 80, visible: true, editable: true, field: "status", isCustom: false },
@@ -1346,13 +1346,40 @@ function TaskRow({
             const isCompleted = task.status === "COMPLETED";
             return (
               <td key={col.id} className="px-2 py-2 text-center" style={colWidthStyle(col.width)}>
-                <input
-                  type="checkbox"
-                  checked={isCompleted}
-                  onChange={() => onComplete(task.id, task.status)}
-                  className="w-4 h-4 rounded border-gray-300 text-teal-600 focus:ring-teal-500 cursor-pointer"
+                <label
+                  className="inline-flex items-center cursor-pointer"
                   title={isCompleted ? "取消完成" : "标记为完成"}
-                />
+                >
+                  <input
+                    type="checkbox"
+                    checked={isCompleted}
+                    onChange={() => onComplete(task.id, task.status)}
+                    className="sr-only"
+                  />
+                  <span
+                    className={`inline-flex flex-shrink-0 items-center justify-center w-5 h-5 rounded border-2 transition-colors ${
+                      isCompleted
+                        ? "bg-teal-600 border-teal-600"
+                        : "border-gray-300 hover:border-teal-400"
+                    }`}
+                  >
+                    {isCompleted && (
+                      <svg
+                        className="w-3 h-3 text-white"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          d="M2 6 L5 9 L10 3"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    )}
+                  </span>
+                </label>
               </td>
             );
           }
