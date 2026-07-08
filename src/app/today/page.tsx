@@ -18,7 +18,6 @@ async function getTodayTasks() {
         status: { not: TaskStatus.COMPLETED },
         OR: [
           { dueDate: { gte: today, lt: tomorrow } },
-          { startDate: { gte: today, lt: tomorrow } },
         ],
       },
       orderBy: { dueDate: "asc" },

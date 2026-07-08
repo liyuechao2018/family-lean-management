@@ -63,6 +63,16 @@ export type Setting = $Result.DefaultSelection<Prisma.$SettingPayload>
  * 
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+/**
+ * Model CustomField
+ * 自定义字段定义
+ */
+export type CustomField = $Result.DefaultSelection<Prisma.$CustomFieldPayload>
+/**
+ * Model TaskFieldValue
+ * 任务自定义字段值
+ */
+export type TaskFieldValue = $Result.DefaultSelection<Prisma.$TaskFieldValuePayload>
 
 /**
  * Enums
@@ -119,6 +129,16 @@ export const ReminderTiming: {
 
 export type ReminderTiming = (typeof ReminderTiming)[keyof typeof ReminderTiming]
 
+
+export const CustomFieldType: {
+  TEXT: 'TEXT',
+  DATE: 'DATE',
+  SELECT: 'SELECT',
+  NUMBER: 'NUMBER'
+};
+
+export type CustomFieldType = (typeof CustomFieldType)[keyof typeof CustomFieldType]
+
 }
 
 export type TaskStatus = $Enums.TaskStatus
@@ -136,6 +156,10 @@ export const LedgerType: typeof $Enums.LedgerType
 export type ReminderTiming = $Enums.ReminderTiming
 
 export const ReminderTiming: typeof $Enums.ReminderTiming
+
+export type CustomFieldType = $Enums.CustomFieldType
+
+export const CustomFieldType: typeof $Enums.CustomFieldType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -354,6 +378,26 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.customField`: Exposes CRUD operations for the **CustomField** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CustomFields
+    * const customFields = await prisma.customField.findMany()
+    * ```
+    */
+  get customField(): Prisma.CustomFieldDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.taskFieldValue`: Exposes CRUD operations for the **TaskFieldValue** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TaskFieldValues
+    * const taskFieldValues = await prisma.taskFieldValue.findMany()
+    * ```
+    */
+  get taskFieldValue(): Prisma.TaskFieldValueDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -804,7 +848,9 @@ export namespace Prisma {
     LedgerTask: 'LedgerTask',
     Reminder: 'Reminder',
     Setting: 'Setting',
-    User: 'User'
+    User: 'User',
+    CustomField: 'CustomField',
+    TaskFieldValue: 'TaskFieldValue'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -823,7 +869,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "category" | "tag" | "taskTag" | "task" | "recurringTask" | "ledger" | "ledgerTask" | "reminder" | "setting" | "user"
+      modelProps: "category" | "tag" | "taskTag" | "task" | "recurringTask" | "ledger" | "ledgerTask" | "reminder" | "setting" | "user" | "customField" | "taskFieldValue"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1567,6 +1613,154 @@ export namespace Prisma {
           }
         }
       }
+      CustomField: {
+        payload: Prisma.$CustomFieldPayload<ExtArgs>
+        fields: Prisma.CustomFieldFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CustomFieldFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomFieldPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CustomFieldFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomFieldPayload>
+          }
+          findFirst: {
+            args: Prisma.CustomFieldFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomFieldPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CustomFieldFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomFieldPayload>
+          }
+          findMany: {
+            args: Prisma.CustomFieldFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomFieldPayload>[]
+          }
+          create: {
+            args: Prisma.CustomFieldCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomFieldPayload>
+          }
+          createMany: {
+            args: Prisma.CustomFieldCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CustomFieldCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomFieldPayload>[]
+          }
+          delete: {
+            args: Prisma.CustomFieldDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomFieldPayload>
+          }
+          update: {
+            args: Prisma.CustomFieldUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomFieldPayload>
+          }
+          deleteMany: {
+            args: Prisma.CustomFieldDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CustomFieldUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CustomFieldUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomFieldPayload>[]
+          }
+          upsert: {
+            args: Prisma.CustomFieldUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomFieldPayload>
+          }
+          aggregate: {
+            args: Prisma.CustomFieldAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCustomField>
+          }
+          groupBy: {
+            args: Prisma.CustomFieldGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CustomFieldGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CustomFieldCountArgs<ExtArgs>
+            result: $Utils.Optional<CustomFieldCountAggregateOutputType> | number
+          }
+        }
+      }
+      TaskFieldValue: {
+        payload: Prisma.$TaskFieldValuePayload<ExtArgs>
+        fields: Prisma.TaskFieldValueFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TaskFieldValueFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TaskFieldValuePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TaskFieldValueFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TaskFieldValuePayload>
+          }
+          findFirst: {
+            args: Prisma.TaskFieldValueFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TaskFieldValuePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TaskFieldValueFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TaskFieldValuePayload>
+          }
+          findMany: {
+            args: Prisma.TaskFieldValueFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TaskFieldValuePayload>[]
+          }
+          create: {
+            args: Prisma.TaskFieldValueCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TaskFieldValuePayload>
+          }
+          createMany: {
+            args: Prisma.TaskFieldValueCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TaskFieldValueCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TaskFieldValuePayload>[]
+          }
+          delete: {
+            args: Prisma.TaskFieldValueDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TaskFieldValuePayload>
+          }
+          update: {
+            args: Prisma.TaskFieldValueUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TaskFieldValuePayload>
+          }
+          deleteMany: {
+            args: Prisma.TaskFieldValueDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TaskFieldValueUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TaskFieldValueUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TaskFieldValuePayload>[]
+          }
+          upsert: {
+            args: Prisma.TaskFieldValueUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TaskFieldValuePayload>
+          }
+          aggregate: {
+            args: Prisma.TaskFieldValueAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTaskFieldValue>
+          }
+          groupBy: {
+            args: Prisma.TaskFieldValueGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TaskFieldValueGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TaskFieldValueCountArgs<ExtArgs>
+            result: $Utils.Optional<TaskFieldValueCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1673,6 +1867,8 @@ export namespace Prisma {
     reminder?: ReminderOmit
     setting?: SettingOmit
     user?: UserOmit
+    customField?: CustomFieldOmit
+    taskFieldValue?: TaskFieldValueOmit
   }
 
   /* Types for Logging */
@@ -1828,6 +2024,7 @@ export namespace Prisma {
     reminders: number
     taskTags: number
     children: number
+    fieldValues: number
   }
 
   export type TaskCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1835,6 +2032,7 @@ export namespace Prisma {
     reminders?: boolean | TaskCountOutputTypeCountRemindersArgs
     taskTags?: boolean | TaskCountOutputTypeCountTaskTagsArgs
     children?: boolean | TaskCountOutputTypeCountChildrenArgs
+    fieldValues?: boolean | TaskCountOutputTypeCountFieldValuesArgs
   }
 
   // Custom InputTypes
@@ -1876,6 +2074,13 @@ export namespace Prisma {
     where?: TaskWhereInput
   }
 
+  /**
+   * TaskCountOutputType without action
+   */
+  export type TaskCountOutputTypeCountFieldValuesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TaskFieldValueWhereInput
+  }
+
 
   /**
    * Count Type LedgerCountOutputType
@@ -1905,6 +2110,37 @@ export namespace Prisma {
    */
   export type LedgerCountOutputTypeCountTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LedgerTaskWhereInput
+  }
+
+
+  /**
+   * Count Type CustomFieldCountOutputType
+   */
+
+  export type CustomFieldCountOutputType = {
+    values: number
+  }
+
+  export type CustomFieldCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    values?: boolean | CustomFieldCountOutputTypeCountValuesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CustomFieldCountOutputType without action
+   */
+  export type CustomFieldCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomFieldCountOutputType
+     */
+    select?: CustomFieldCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CustomFieldCountOutputType without action
+   */
+  export type CustomFieldCountOutputTypeCountValuesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TaskFieldValueWhereInput
   }
 
 
@@ -5294,7 +5530,6 @@ export namespace Prisma {
     status: $Enums.TaskStatus | null
     categoryId: string | null
     parentId: string | null
-    startDate: Date | null
     dueDate: Date | null
     completedAt: Date | null
     npc: string | null
@@ -5312,7 +5547,6 @@ export namespace Prisma {
     status: $Enums.TaskStatus | null
     categoryId: string | null
     parentId: string | null
-    startDate: Date | null
     dueDate: Date | null
     completedAt: Date | null
     npc: string | null
@@ -5330,7 +5564,6 @@ export namespace Prisma {
     status: number
     categoryId: number
     parentId: number
-    startDate: number
     dueDate: number
     completedAt: number
     npc: number
@@ -5358,7 +5591,6 @@ export namespace Prisma {
     status?: true
     categoryId?: true
     parentId?: true
-    startDate?: true
     dueDate?: true
     completedAt?: true
     npc?: true
@@ -5376,7 +5608,6 @@ export namespace Prisma {
     status?: true
     categoryId?: true
     parentId?: true
-    startDate?: true
     dueDate?: true
     completedAt?: true
     npc?: true
@@ -5394,7 +5625,6 @@ export namespace Prisma {
     status?: true
     categoryId?: true
     parentId?: true
-    startDate?: true
     dueDate?: true
     completedAt?: true
     npc?: true
@@ -5499,7 +5729,6 @@ export namespace Prisma {
     status: $Enums.TaskStatus
     categoryId: string | null
     parentId: string | null
-    startDate: Date | null
     dueDate: Date | null
     completedAt: Date | null
     npc: string | null
@@ -5536,7 +5765,6 @@ export namespace Prisma {
     status?: boolean
     categoryId?: boolean
     parentId?: boolean
-    startDate?: boolean
     dueDate?: boolean
     completedAt?: boolean
     npc?: boolean
@@ -5552,6 +5780,7 @@ export namespace Prisma {
     parent?: boolean | Task$parentArgs<ExtArgs>
     children?: boolean | Task$childrenArgs<ExtArgs>
     category?: boolean | Task$categoryArgs<ExtArgs>
+    fieldValues?: boolean | Task$fieldValuesArgs<ExtArgs>
     _count?: boolean | TaskCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["task"]>
 
@@ -5562,7 +5791,6 @@ export namespace Prisma {
     status?: boolean
     categoryId?: boolean
     parentId?: boolean
-    startDate?: boolean
     dueDate?: boolean
     completedAt?: boolean
     npc?: boolean
@@ -5582,7 +5810,6 @@ export namespace Prisma {
     status?: boolean
     categoryId?: boolean
     parentId?: boolean
-    startDate?: boolean
     dueDate?: boolean
     completedAt?: boolean
     npc?: boolean
@@ -5602,7 +5829,6 @@ export namespace Prisma {
     status?: boolean
     categoryId?: boolean
     parentId?: boolean
-    startDate?: boolean
     dueDate?: boolean
     completedAt?: boolean
     npc?: boolean
@@ -5613,7 +5839,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type TaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "status" | "categoryId" | "parentId" | "startDate" | "dueDate" | "completedAt" | "npc" | "notes" | "towerLink" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["task"]>
+  export type TaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "status" | "categoryId" | "parentId" | "dueDate" | "completedAt" | "npc" | "notes" | "towerLink" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["task"]>
   export type TaskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ledgerItems?: boolean | Task$ledgerItemsArgs<ExtArgs>
     recurringTask?: boolean | Task$recurringTaskArgs<ExtArgs>
@@ -5622,6 +5848,7 @@ export namespace Prisma {
     parent?: boolean | Task$parentArgs<ExtArgs>
     children?: boolean | Task$childrenArgs<ExtArgs>
     category?: boolean | Task$categoryArgs<ExtArgs>
+    fieldValues?: boolean | Task$fieldValuesArgs<ExtArgs>
     _count?: boolean | TaskCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TaskIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5643,6 +5870,7 @@ export namespace Prisma {
       parent: Prisma.$TaskPayload<ExtArgs> | null
       children: Prisma.$TaskPayload<ExtArgs>[]
       category: Prisma.$CategoryPayload<ExtArgs> | null
+      fieldValues: Prisma.$TaskFieldValuePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5651,7 +5879,6 @@ export namespace Prisma {
       status: $Enums.TaskStatus
       categoryId: string | null
       parentId: string | null
-      startDate: Date | null
       dueDate: Date | null
       completedAt: Date | null
       npc: string | null
@@ -6061,6 +6288,7 @@ export namespace Prisma {
     parent<T extends Task$parentArgs<ExtArgs> = {}>(args?: Subset<T, Task$parentArgs<ExtArgs>>): Prisma__TaskClient<$Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     children<T extends Task$childrenArgs<ExtArgs> = {}>(args?: Subset<T, Task$childrenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     category<T extends Task$categoryArgs<ExtArgs> = {}>(args?: Subset<T, Task$categoryArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    fieldValues<T extends Task$fieldValuesArgs<ExtArgs> = {}>(args?: Subset<T, Task$fieldValuesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TaskFieldValuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6096,7 +6324,6 @@ export namespace Prisma {
     readonly status: FieldRef<"Task", 'TaskStatus'>
     readonly categoryId: FieldRef<"Task", 'String'>
     readonly parentId: FieldRef<"Task", 'String'>
-    readonly startDate: FieldRef<"Task", 'DateTime'>
     readonly dueDate: FieldRef<"Task", 'DateTime'>
     readonly completedAt: FieldRef<"Task", 'DateTime'>
     readonly npc: FieldRef<"Task", 'String'>
@@ -6649,6 +6876,30 @@ export namespace Prisma {
      */
     include?: CategoryInclude<ExtArgs> | null
     where?: CategoryWhereInput
+  }
+
+  /**
+   * Task.fieldValues
+   */
+  export type Task$fieldValuesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TaskFieldValue
+     */
+    select?: TaskFieldValueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TaskFieldValue
+     */
+    omit?: TaskFieldValueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TaskFieldValueInclude<ExtArgs> | null
+    where?: TaskFieldValueWhereInput
+    orderBy?: TaskFieldValueOrderByWithRelationInput | TaskFieldValueOrderByWithRelationInput[]
+    cursor?: TaskFieldValueWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TaskFieldValueScalarFieldEnum | TaskFieldValueScalarFieldEnum[]
   }
 
   /**
@@ -13154,6 +13405,2224 @@ export namespace Prisma {
 
 
   /**
+   * Model CustomField
+   */
+
+  export type AggregateCustomField = {
+    _count: CustomFieldCountAggregateOutputType | null
+    _avg: CustomFieldAvgAggregateOutputType | null
+    _sum: CustomFieldSumAggregateOutputType | null
+    _min: CustomFieldMinAggregateOutputType | null
+    _max: CustomFieldMaxAggregateOutputType | null
+  }
+
+  export type CustomFieldAvgAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type CustomFieldSumAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type CustomFieldMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    key: string | null
+    type: $Enums.CustomFieldType | null
+    options: string | null
+    sortOrder: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CustomFieldMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    key: string | null
+    type: $Enums.CustomFieldType | null
+    options: string | null
+    sortOrder: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CustomFieldCountAggregateOutputType = {
+    id: number
+    name: number
+    key: number
+    type: number
+    options: number
+    sortOrder: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CustomFieldAvgAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type CustomFieldSumAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type CustomFieldMinAggregateInputType = {
+    id?: true
+    name?: true
+    key?: true
+    type?: true
+    options?: true
+    sortOrder?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CustomFieldMaxAggregateInputType = {
+    id?: true
+    name?: true
+    key?: true
+    type?: true
+    options?: true
+    sortOrder?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CustomFieldCountAggregateInputType = {
+    id?: true
+    name?: true
+    key?: true
+    type?: true
+    options?: true
+    sortOrder?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CustomFieldAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CustomField to aggregate.
+     */
+    where?: CustomFieldWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomFields to fetch.
+     */
+    orderBy?: CustomFieldOrderByWithRelationInput | CustomFieldOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CustomFieldWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomFields from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomFields.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CustomFields
+    **/
+    _count?: true | CustomFieldCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CustomFieldAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CustomFieldSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CustomFieldMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CustomFieldMaxAggregateInputType
+  }
+
+  export type GetCustomFieldAggregateType<T extends CustomFieldAggregateArgs> = {
+        [P in keyof T & keyof AggregateCustomField]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCustomField[P]>
+      : GetScalarType<T[P], AggregateCustomField[P]>
+  }
+
+
+
+
+  export type CustomFieldGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CustomFieldWhereInput
+    orderBy?: CustomFieldOrderByWithAggregationInput | CustomFieldOrderByWithAggregationInput[]
+    by: CustomFieldScalarFieldEnum[] | CustomFieldScalarFieldEnum
+    having?: CustomFieldScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CustomFieldCountAggregateInputType | true
+    _avg?: CustomFieldAvgAggregateInputType
+    _sum?: CustomFieldSumAggregateInputType
+    _min?: CustomFieldMinAggregateInputType
+    _max?: CustomFieldMaxAggregateInputType
+  }
+
+  export type CustomFieldGroupByOutputType = {
+    id: string
+    name: string
+    key: string
+    type: $Enums.CustomFieldType
+    options: string | null
+    sortOrder: number
+    createdAt: Date
+    updatedAt: Date
+    _count: CustomFieldCountAggregateOutputType | null
+    _avg: CustomFieldAvgAggregateOutputType | null
+    _sum: CustomFieldSumAggregateOutputType | null
+    _min: CustomFieldMinAggregateOutputType | null
+    _max: CustomFieldMaxAggregateOutputType | null
+  }
+
+  type GetCustomFieldGroupByPayload<T extends CustomFieldGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CustomFieldGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CustomFieldGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CustomFieldGroupByOutputType[P]>
+            : GetScalarType<T[P], CustomFieldGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CustomFieldSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    key?: boolean
+    type?: boolean
+    options?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    values?: boolean | CustomField$valuesArgs<ExtArgs>
+    _count?: boolean | CustomFieldCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["customField"]>
+
+  export type CustomFieldSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    key?: boolean
+    type?: boolean
+    options?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["customField"]>
+
+  export type CustomFieldSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    key?: boolean
+    type?: boolean
+    options?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["customField"]>
+
+  export type CustomFieldSelectScalar = {
+    id?: boolean
+    name?: boolean
+    key?: boolean
+    type?: boolean
+    options?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type CustomFieldOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "key" | "type" | "options" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["customField"]>
+  export type CustomFieldInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    values?: boolean | CustomField$valuesArgs<ExtArgs>
+    _count?: boolean | CustomFieldCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CustomFieldIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type CustomFieldIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $CustomFieldPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CustomField"
+    objects: {
+      values: Prisma.$TaskFieldValuePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      key: string
+      type: $Enums.CustomFieldType
+      options: string | null
+      sortOrder: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["customField"]>
+    composites: {}
+  }
+
+  type CustomFieldGetPayload<S extends boolean | null | undefined | CustomFieldDefaultArgs> = $Result.GetResult<Prisma.$CustomFieldPayload, S>
+
+  type CustomFieldCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CustomFieldFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CustomFieldCountAggregateInputType | true
+    }
+
+  export interface CustomFieldDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CustomField'], meta: { name: 'CustomField' } }
+    /**
+     * Find zero or one CustomField that matches the filter.
+     * @param {CustomFieldFindUniqueArgs} args - Arguments to find a CustomField
+     * @example
+     * // Get one CustomField
+     * const customField = await prisma.customField.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CustomFieldFindUniqueArgs>(args: SelectSubset<T, CustomFieldFindUniqueArgs<ExtArgs>>): Prisma__CustomFieldClient<$Result.GetResult<Prisma.$CustomFieldPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CustomField that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CustomFieldFindUniqueOrThrowArgs} args - Arguments to find a CustomField
+     * @example
+     * // Get one CustomField
+     * const customField = await prisma.customField.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CustomFieldFindUniqueOrThrowArgs>(args: SelectSubset<T, CustomFieldFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CustomFieldClient<$Result.GetResult<Prisma.$CustomFieldPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CustomField that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomFieldFindFirstArgs} args - Arguments to find a CustomField
+     * @example
+     * // Get one CustomField
+     * const customField = await prisma.customField.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CustomFieldFindFirstArgs>(args?: SelectSubset<T, CustomFieldFindFirstArgs<ExtArgs>>): Prisma__CustomFieldClient<$Result.GetResult<Prisma.$CustomFieldPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CustomField that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomFieldFindFirstOrThrowArgs} args - Arguments to find a CustomField
+     * @example
+     * // Get one CustomField
+     * const customField = await prisma.customField.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CustomFieldFindFirstOrThrowArgs>(args?: SelectSubset<T, CustomFieldFindFirstOrThrowArgs<ExtArgs>>): Prisma__CustomFieldClient<$Result.GetResult<Prisma.$CustomFieldPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CustomFields that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomFieldFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CustomFields
+     * const customFields = await prisma.customField.findMany()
+     * 
+     * // Get first 10 CustomFields
+     * const customFields = await prisma.customField.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const customFieldWithIdOnly = await prisma.customField.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CustomFieldFindManyArgs>(args?: SelectSubset<T, CustomFieldFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomFieldPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CustomField.
+     * @param {CustomFieldCreateArgs} args - Arguments to create a CustomField.
+     * @example
+     * // Create one CustomField
+     * const CustomField = await prisma.customField.create({
+     *   data: {
+     *     // ... data to create a CustomField
+     *   }
+     * })
+     * 
+     */
+    create<T extends CustomFieldCreateArgs>(args: SelectSubset<T, CustomFieldCreateArgs<ExtArgs>>): Prisma__CustomFieldClient<$Result.GetResult<Prisma.$CustomFieldPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CustomFields.
+     * @param {CustomFieldCreateManyArgs} args - Arguments to create many CustomFields.
+     * @example
+     * // Create many CustomFields
+     * const customField = await prisma.customField.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CustomFieldCreateManyArgs>(args?: SelectSubset<T, CustomFieldCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CustomFields and returns the data saved in the database.
+     * @param {CustomFieldCreateManyAndReturnArgs} args - Arguments to create many CustomFields.
+     * @example
+     * // Create many CustomFields
+     * const customField = await prisma.customField.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CustomFields and only return the `id`
+     * const customFieldWithIdOnly = await prisma.customField.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CustomFieldCreateManyAndReturnArgs>(args?: SelectSubset<T, CustomFieldCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomFieldPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a CustomField.
+     * @param {CustomFieldDeleteArgs} args - Arguments to delete one CustomField.
+     * @example
+     * // Delete one CustomField
+     * const CustomField = await prisma.customField.delete({
+     *   where: {
+     *     // ... filter to delete one CustomField
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CustomFieldDeleteArgs>(args: SelectSubset<T, CustomFieldDeleteArgs<ExtArgs>>): Prisma__CustomFieldClient<$Result.GetResult<Prisma.$CustomFieldPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CustomField.
+     * @param {CustomFieldUpdateArgs} args - Arguments to update one CustomField.
+     * @example
+     * // Update one CustomField
+     * const customField = await prisma.customField.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CustomFieldUpdateArgs>(args: SelectSubset<T, CustomFieldUpdateArgs<ExtArgs>>): Prisma__CustomFieldClient<$Result.GetResult<Prisma.$CustomFieldPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CustomFields.
+     * @param {CustomFieldDeleteManyArgs} args - Arguments to filter CustomFields to delete.
+     * @example
+     * // Delete a few CustomFields
+     * const { count } = await prisma.customField.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CustomFieldDeleteManyArgs>(args?: SelectSubset<T, CustomFieldDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CustomFields.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomFieldUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CustomFields
+     * const customField = await prisma.customField.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CustomFieldUpdateManyArgs>(args: SelectSubset<T, CustomFieldUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CustomFields and returns the data updated in the database.
+     * @param {CustomFieldUpdateManyAndReturnArgs} args - Arguments to update many CustomFields.
+     * @example
+     * // Update many CustomFields
+     * const customField = await prisma.customField.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CustomFields and only return the `id`
+     * const customFieldWithIdOnly = await prisma.customField.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CustomFieldUpdateManyAndReturnArgs>(args: SelectSubset<T, CustomFieldUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomFieldPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one CustomField.
+     * @param {CustomFieldUpsertArgs} args - Arguments to update or create a CustomField.
+     * @example
+     * // Update or create a CustomField
+     * const customField = await prisma.customField.upsert({
+     *   create: {
+     *     // ... data to create a CustomField
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CustomField we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CustomFieldUpsertArgs>(args: SelectSubset<T, CustomFieldUpsertArgs<ExtArgs>>): Prisma__CustomFieldClient<$Result.GetResult<Prisma.$CustomFieldPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CustomFields.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomFieldCountArgs} args - Arguments to filter CustomFields to count.
+     * @example
+     * // Count the number of CustomFields
+     * const count = await prisma.customField.count({
+     *   where: {
+     *     // ... the filter for the CustomFields we want to count
+     *   }
+     * })
+    **/
+    count<T extends CustomFieldCountArgs>(
+      args?: Subset<T, CustomFieldCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CustomFieldCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CustomField.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomFieldAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CustomFieldAggregateArgs>(args: Subset<T, CustomFieldAggregateArgs>): Prisma.PrismaPromise<GetCustomFieldAggregateType<T>>
+
+    /**
+     * Group by CustomField.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomFieldGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CustomFieldGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CustomFieldGroupByArgs['orderBy'] }
+        : { orderBy?: CustomFieldGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CustomFieldGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCustomFieldGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CustomField model
+   */
+  readonly fields: CustomFieldFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CustomField.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CustomFieldClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    values<T extends CustomField$valuesArgs<ExtArgs> = {}>(args?: Subset<T, CustomField$valuesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TaskFieldValuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CustomField model
+   */
+  interface CustomFieldFieldRefs {
+    readonly id: FieldRef<"CustomField", 'String'>
+    readonly name: FieldRef<"CustomField", 'String'>
+    readonly key: FieldRef<"CustomField", 'String'>
+    readonly type: FieldRef<"CustomField", 'CustomFieldType'>
+    readonly options: FieldRef<"CustomField", 'String'>
+    readonly sortOrder: FieldRef<"CustomField", 'Int'>
+    readonly createdAt: FieldRef<"CustomField", 'DateTime'>
+    readonly updatedAt: FieldRef<"CustomField", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CustomField findUnique
+   */
+  export type CustomFieldFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomField
+     */
+    select?: CustomFieldSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomField
+     */
+    omit?: CustomFieldOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomFieldInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomField to fetch.
+     */
+    where: CustomFieldWhereUniqueInput
+  }
+
+  /**
+   * CustomField findUniqueOrThrow
+   */
+  export type CustomFieldFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomField
+     */
+    select?: CustomFieldSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomField
+     */
+    omit?: CustomFieldOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomFieldInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomField to fetch.
+     */
+    where: CustomFieldWhereUniqueInput
+  }
+
+  /**
+   * CustomField findFirst
+   */
+  export type CustomFieldFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomField
+     */
+    select?: CustomFieldSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomField
+     */
+    omit?: CustomFieldOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomFieldInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomField to fetch.
+     */
+    where?: CustomFieldWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomFields to fetch.
+     */
+    orderBy?: CustomFieldOrderByWithRelationInput | CustomFieldOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CustomFields.
+     */
+    cursor?: CustomFieldWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomFields from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomFields.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CustomFields.
+     */
+    distinct?: CustomFieldScalarFieldEnum | CustomFieldScalarFieldEnum[]
+  }
+
+  /**
+   * CustomField findFirstOrThrow
+   */
+  export type CustomFieldFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomField
+     */
+    select?: CustomFieldSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomField
+     */
+    omit?: CustomFieldOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomFieldInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomField to fetch.
+     */
+    where?: CustomFieldWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomFields to fetch.
+     */
+    orderBy?: CustomFieldOrderByWithRelationInput | CustomFieldOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CustomFields.
+     */
+    cursor?: CustomFieldWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomFields from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomFields.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CustomFields.
+     */
+    distinct?: CustomFieldScalarFieldEnum | CustomFieldScalarFieldEnum[]
+  }
+
+  /**
+   * CustomField findMany
+   */
+  export type CustomFieldFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomField
+     */
+    select?: CustomFieldSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomField
+     */
+    omit?: CustomFieldOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomFieldInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomFields to fetch.
+     */
+    where?: CustomFieldWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomFields to fetch.
+     */
+    orderBy?: CustomFieldOrderByWithRelationInput | CustomFieldOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CustomFields.
+     */
+    cursor?: CustomFieldWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomFields from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomFields.
+     */
+    skip?: number
+    distinct?: CustomFieldScalarFieldEnum | CustomFieldScalarFieldEnum[]
+  }
+
+  /**
+   * CustomField create
+   */
+  export type CustomFieldCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomField
+     */
+    select?: CustomFieldSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomField
+     */
+    omit?: CustomFieldOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomFieldInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CustomField.
+     */
+    data: XOR<CustomFieldCreateInput, CustomFieldUncheckedCreateInput>
+  }
+
+  /**
+   * CustomField createMany
+   */
+  export type CustomFieldCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CustomFields.
+     */
+    data: CustomFieldCreateManyInput | CustomFieldCreateManyInput[]
+  }
+
+  /**
+   * CustomField createManyAndReturn
+   */
+  export type CustomFieldCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomField
+     */
+    select?: CustomFieldSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomField
+     */
+    omit?: CustomFieldOmit<ExtArgs> | null
+    /**
+     * The data used to create many CustomFields.
+     */
+    data: CustomFieldCreateManyInput | CustomFieldCreateManyInput[]
+  }
+
+  /**
+   * CustomField update
+   */
+  export type CustomFieldUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomField
+     */
+    select?: CustomFieldSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomField
+     */
+    omit?: CustomFieldOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomFieldInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CustomField.
+     */
+    data: XOR<CustomFieldUpdateInput, CustomFieldUncheckedUpdateInput>
+    /**
+     * Choose, which CustomField to update.
+     */
+    where: CustomFieldWhereUniqueInput
+  }
+
+  /**
+   * CustomField updateMany
+   */
+  export type CustomFieldUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CustomFields.
+     */
+    data: XOR<CustomFieldUpdateManyMutationInput, CustomFieldUncheckedUpdateManyInput>
+    /**
+     * Filter which CustomFields to update
+     */
+    where?: CustomFieldWhereInput
+    /**
+     * Limit how many CustomFields to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CustomField updateManyAndReturn
+   */
+  export type CustomFieldUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomField
+     */
+    select?: CustomFieldSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomField
+     */
+    omit?: CustomFieldOmit<ExtArgs> | null
+    /**
+     * The data used to update CustomFields.
+     */
+    data: XOR<CustomFieldUpdateManyMutationInput, CustomFieldUncheckedUpdateManyInput>
+    /**
+     * Filter which CustomFields to update
+     */
+    where?: CustomFieldWhereInput
+    /**
+     * Limit how many CustomFields to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CustomField upsert
+   */
+  export type CustomFieldUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomField
+     */
+    select?: CustomFieldSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomField
+     */
+    omit?: CustomFieldOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomFieldInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CustomField to update in case it exists.
+     */
+    where: CustomFieldWhereUniqueInput
+    /**
+     * In case the CustomField found by the `where` argument doesn't exist, create a new CustomField with this data.
+     */
+    create: XOR<CustomFieldCreateInput, CustomFieldUncheckedCreateInput>
+    /**
+     * In case the CustomField was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CustomFieldUpdateInput, CustomFieldUncheckedUpdateInput>
+  }
+
+  /**
+   * CustomField delete
+   */
+  export type CustomFieldDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomField
+     */
+    select?: CustomFieldSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomField
+     */
+    omit?: CustomFieldOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomFieldInclude<ExtArgs> | null
+    /**
+     * Filter which CustomField to delete.
+     */
+    where: CustomFieldWhereUniqueInput
+  }
+
+  /**
+   * CustomField deleteMany
+   */
+  export type CustomFieldDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CustomFields to delete
+     */
+    where?: CustomFieldWhereInput
+    /**
+     * Limit how many CustomFields to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * CustomField.values
+   */
+  export type CustomField$valuesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TaskFieldValue
+     */
+    select?: TaskFieldValueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TaskFieldValue
+     */
+    omit?: TaskFieldValueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TaskFieldValueInclude<ExtArgs> | null
+    where?: TaskFieldValueWhereInput
+    orderBy?: TaskFieldValueOrderByWithRelationInput | TaskFieldValueOrderByWithRelationInput[]
+    cursor?: TaskFieldValueWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TaskFieldValueScalarFieldEnum | TaskFieldValueScalarFieldEnum[]
+  }
+
+  /**
+   * CustomField without action
+   */
+  export type CustomFieldDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomField
+     */
+    select?: CustomFieldSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomField
+     */
+    omit?: CustomFieldOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomFieldInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TaskFieldValue
+   */
+
+  export type AggregateTaskFieldValue = {
+    _count: TaskFieldValueCountAggregateOutputType | null
+    _min: TaskFieldValueMinAggregateOutputType | null
+    _max: TaskFieldValueMaxAggregateOutputType | null
+  }
+
+  export type TaskFieldValueMinAggregateOutputType = {
+    id: string | null
+    taskId: string | null
+    fieldId: string | null
+    value: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TaskFieldValueMaxAggregateOutputType = {
+    id: string | null
+    taskId: string | null
+    fieldId: string | null
+    value: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TaskFieldValueCountAggregateOutputType = {
+    id: number
+    taskId: number
+    fieldId: number
+    value: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TaskFieldValueMinAggregateInputType = {
+    id?: true
+    taskId?: true
+    fieldId?: true
+    value?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TaskFieldValueMaxAggregateInputType = {
+    id?: true
+    taskId?: true
+    fieldId?: true
+    value?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TaskFieldValueCountAggregateInputType = {
+    id?: true
+    taskId?: true
+    fieldId?: true
+    value?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TaskFieldValueAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TaskFieldValue to aggregate.
+     */
+    where?: TaskFieldValueWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TaskFieldValues to fetch.
+     */
+    orderBy?: TaskFieldValueOrderByWithRelationInput | TaskFieldValueOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TaskFieldValueWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TaskFieldValues from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TaskFieldValues.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TaskFieldValues
+    **/
+    _count?: true | TaskFieldValueCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TaskFieldValueMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TaskFieldValueMaxAggregateInputType
+  }
+
+  export type GetTaskFieldValueAggregateType<T extends TaskFieldValueAggregateArgs> = {
+        [P in keyof T & keyof AggregateTaskFieldValue]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTaskFieldValue[P]>
+      : GetScalarType<T[P], AggregateTaskFieldValue[P]>
+  }
+
+
+
+
+  export type TaskFieldValueGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TaskFieldValueWhereInput
+    orderBy?: TaskFieldValueOrderByWithAggregationInput | TaskFieldValueOrderByWithAggregationInput[]
+    by: TaskFieldValueScalarFieldEnum[] | TaskFieldValueScalarFieldEnum
+    having?: TaskFieldValueScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TaskFieldValueCountAggregateInputType | true
+    _min?: TaskFieldValueMinAggregateInputType
+    _max?: TaskFieldValueMaxAggregateInputType
+  }
+
+  export type TaskFieldValueGroupByOutputType = {
+    id: string
+    taskId: string
+    fieldId: string
+    value: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: TaskFieldValueCountAggregateOutputType | null
+    _min: TaskFieldValueMinAggregateOutputType | null
+    _max: TaskFieldValueMaxAggregateOutputType | null
+  }
+
+  type GetTaskFieldValueGroupByPayload<T extends TaskFieldValueGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TaskFieldValueGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TaskFieldValueGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TaskFieldValueGroupByOutputType[P]>
+            : GetScalarType<T[P], TaskFieldValueGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TaskFieldValueSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    taskId?: boolean
+    fieldId?: boolean
+    value?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    task?: boolean | TaskDefaultArgs<ExtArgs>
+    field?: boolean | CustomFieldDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["taskFieldValue"]>
+
+  export type TaskFieldValueSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    taskId?: boolean
+    fieldId?: boolean
+    value?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    task?: boolean | TaskDefaultArgs<ExtArgs>
+    field?: boolean | CustomFieldDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["taskFieldValue"]>
+
+  export type TaskFieldValueSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    taskId?: boolean
+    fieldId?: boolean
+    value?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    task?: boolean | TaskDefaultArgs<ExtArgs>
+    field?: boolean | CustomFieldDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["taskFieldValue"]>
+
+  export type TaskFieldValueSelectScalar = {
+    id?: boolean
+    taskId?: boolean
+    fieldId?: boolean
+    value?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TaskFieldValueOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "taskId" | "fieldId" | "value" | "createdAt" | "updatedAt", ExtArgs["result"]["taskFieldValue"]>
+  export type TaskFieldValueInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    task?: boolean | TaskDefaultArgs<ExtArgs>
+    field?: boolean | CustomFieldDefaultArgs<ExtArgs>
+  }
+  export type TaskFieldValueIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    task?: boolean | TaskDefaultArgs<ExtArgs>
+    field?: boolean | CustomFieldDefaultArgs<ExtArgs>
+  }
+  export type TaskFieldValueIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    task?: boolean | TaskDefaultArgs<ExtArgs>
+    field?: boolean | CustomFieldDefaultArgs<ExtArgs>
+  }
+
+  export type $TaskFieldValuePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TaskFieldValue"
+    objects: {
+      task: Prisma.$TaskPayload<ExtArgs>
+      field: Prisma.$CustomFieldPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      taskId: string
+      fieldId: string
+      value: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["taskFieldValue"]>
+    composites: {}
+  }
+
+  type TaskFieldValueGetPayload<S extends boolean | null | undefined | TaskFieldValueDefaultArgs> = $Result.GetResult<Prisma.$TaskFieldValuePayload, S>
+
+  type TaskFieldValueCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TaskFieldValueFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TaskFieldValueCountAggregateInputType | true
+    }
+
+  export interface TaskFieldValueDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TaskFieldValue'], meta: { name: 'TaskFieldValue' } }
+    /**
+     * Find zero or one TaskFieldValue that matches the filter.
+     * @param {TaskFieldValueFindUniqueArgs} args - Arguments to find a TaskFieldValue
+     * @example
+     * // Get one TaskFieldValue
+     * const taskFieldValue = await prisma.taskFieldValue.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TaskFieldValueFindUniqueArgs>(args: SelectSubset<T, TaskFieldValueFindUniqueArgs<ExtArgs>>): Prisma__TaskFieldValueClient<$Result.GetResult<Prisma.$TaskFieldValuePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TaskFieldValue that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TaskFieldValueFindUniqueOrThrowArgs} args - Arguments to find a TaskFieldValue
+     * @example
+     * // Get one TaskFieldValue
+     * const taskFieldValue = await prisma.taskFieldValue.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TaskFieldValueFindUniqueOrThrowArgs>(args: SelectSubset<T, TaskFieldValueFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TaskFieldValueClient<$Result.GetResult<Prisma.$TaskFieldValuePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TaskFieldValue that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TaskFieldValueFindFirstArgs} args - Arguments to find a TaskFieldValue
+     * @example
+     * // Get one TaskFieldValue
+     * const taskFieldValue = await prisma.taskFieldValue.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TaskFieldValueFindFirstArgs>(args?: SelectSubset<T, TaskFieldValueFindFirstArgs<ExtArgs>>): Prisma__TaskFieldValueClient<$Result.GetResult<Prisma.$TaskFieldValuePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TaskFieldValue that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TaskFieldValueFindFirstOrThrowArgs} args - Arguments to find a TaskFieldValue
+     * @example
+     * // Get one TaskFieldValue
+     * const taskFieldValue = await prisma.taskFieldValue.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TaskFieldValueFindFirstOrThrowArgs>(args?: SelectSubset<T, TaskFieldValueFindFirstOrThrowArgs<ExtArgs>>): Prisma__TaskFieldValueClient<$Result.GetResult<Prisma.$TaskFieldValuePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TaskFieldValues that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TaskFieldValueFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TaskFieldValues
+     * const taskFieldValues = await prisma.taskFieldValue.findMany()
+     * 
+     * // Get first 10 TaskFieldValues
+     * const taskFieldValues = await prisma.taskFieldValue.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const taskFieldValueWithIdOnly = await prisma.taskFieldValue.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TaskFieldValueFindManyArgs>(args?: SelectSubset<T, TaskFieldValueFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TaskFieldValuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TaskFieldValue.
+     * @param {TaskFieldValueCreateArgs} args - Arguments to create a TaskFieldValue.
+     * @example
+     * // Create one TaskFieldValue
+     * const TaskFieldValue = await prisma.taskFieldValue.create({
+     *   data: {
+     *     // ... data to create a TaskFieldValue
+     *   }
+     * })
+     * 
+     */
+    create<T extends TaskFieldValueCreateArgs>(args: SelectSubset<T, TaskFieldValueCreateArgs<ExtArgs>>): Prisma__TaskFieldValueClient<$Result.GetResult<Prisma.$TaskFieldValuePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TaskFieldValues.
+     * @param {TaskFieldValueCreateManyArgs} args - Arguments to create many TaskFieldValues.
+     * @example
+     * // Create many TaskFieldValues
+     * const taskFieldValue = await prisma.taskFieldValue.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TaskFieldValueCreateManyArgs>(args?: SelectSubset<T, TaskFieldValueCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TaskFieldValues and returns the data saved in the database.
+     * @param {TaskFieldValueCreateManyAndReturnArgs} args - Arguments to create many TaskFieldValues.
+     * @example
+     * // Create many TaskFieldValues
+     * const taskFieldValue = await prisma.taskFieldValue.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TaskFieldValues and only return the `id`
+     * const taskFieldValueWithIdOnly = await prisma.taskFieldValue.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TaskFieldValueCreateManyAndReturnArgs>(args?: SelectSubset<T, TaskFieldValueCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TaskFieldValuePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TaskFieldValue.
+     * @param {TaskFieldValueDeleteArgs} args - Arguments to delete one TaskFieldValue.
+     * @example
+     * // Delete one TaskFieldValue
+     * const TaskFieldValue = await prisma.taskFieldValue.delete({
+     *   where: {
+     *     // ... filter to delete one TaskFieldValue
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TaskFieldValueDeleteArgs>(args: SelectSubset<T, TaskFieldValueDeleteArgs<ExtArgs>>): Prisma__TaskFieldValueClient<$Result.GetResult<Prisma.$TaskFieldValuePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TaskFieldValue.
+     * @param {TaskFieldValueUpdateArgs} args - Arguments to update one TaskFieldValue.
+     * @example
+     * // Update one TaskFieldValue
+     * const taskFieldValue = await prisma.taskFieldValue.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TaskFieldValueUpdateArgs>(args: SelectSubset<T, TaskFieldValueUpdateArgs<ExtArgs>>): Prisma__TaskFieldValueClient<$Result.GetResult<Prisma.$TaskFieldValuePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TaskFieldValues.
+     * @param {TaskFieldValueDeleteManyArgs} args - Arguments to filter TaskFieldValues to delete.
+     * @example
+     * // Delete a few TaskFieldValues
+     * const { count } = await prisma.taskFieldValue.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TaskFieldValueDeleteManyArgs>(args?: SelectSubset<T, TaskFieldValueDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TaskFieldValues.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TaskFieldValueUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TaskFieldValues
+     * const taskFieldValue = await prisma.taskFieldValue.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TaskFieldValueUpdateManyArgs>(args: SelectSubset<T, TaskFieldValueUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TaskFieldValues and returns the data updated in the database.
+     * @param {TaskFieldValueUpdateManyAndReturnArgs} args - Arguments to update many TaskFieldValues.
+     * @example
+     * // Update many TaskFieldValues
+     * const taskFieldValue = await prisma.taskFieldValue.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TaskFieldValues and only return the `id`
+     * const taskFieldValueWithIdOnly = await prisma.taskFieldValue.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TaskFieldValueUpdateManyAndReturnArgs>(args: SelectSubset<T, TaskFieldValueUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TaskFieldValuePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TaskFieldValue.
+     * @param {TaskFieldValueUpsertArgs} args - Arguments to update or create a TaskFieldValue.
+     * @example
+     * // Update or create a TaskFieldValue
+     * const taskFieldValue = await prisma.taskFieldValue.upsert({
+     *   create: {
+     *     // ... data to create a TaskFieldValue
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TaskFieldValue we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TaskFieldValueUpsertArgs>(args: SelectSubset<T, TaskFieldValueUpsertArgs<ExtArgs>>): Prisma__TaskFieldValueClient<$Result.GetResult<Prisma.$TaskFieldValuePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TaskFieldValues.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TaskFieldValueCountArgs} args - Arguments to filter TaskFieldValues to count.
+     * @example
+     * // Count the number of TaskFieldValues
+     * const count = await prisma.taskFieldValue.count({
+     *   where: {
+     *     // ... the filter for the TaskFieldValues we want to count
+     *   }
+     * })
+    **/
+    count<T extends TaskFieldValueCountArgs>(
+      args?: Subset<T, TaskFieldValueCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TaskFieldValueCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TaskFieldValue.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TaskFieldValueAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TaskFieldValueAggregateArgs>(args: Subset<T, TaskFieldValueAggregateArgs>): Prisma.PrismaPromise<GetTaskFieldValueAggregateType<T>>
+
+    /**
+     * Group by TaskFieldValue.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TaskFieldValueGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TaskFieldValueGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TaskFieldValueGroupByArgs['orderBy'] }
+        : { orderBy?: TaskFieldValueGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TaskFieldValueGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTaskFieldValueGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TaskFieldValue model
+   */
+  readonly fields: TaskFieldValueFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TaskFieldValue.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TaskFieldValueClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    task<T extends TaskDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TaskDefaultArgs<ExtArgs>>): Prisma__TaskClient<$Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    field<T extends CustomFieldDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CustomFieldDefaultArgs<ExtArgs>>): Prisma__CustomFieldClient<$Result.GetResult<Prisma.$CustomFieldPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TaskFieldValue model
+   */
+  interface TaskFieldValueFieldRefs {
+    readonly id: FieldRef<"TaskFieldValue", 'String'>
+    readonly taskId: FieldRef<"TaskFieldValue", 'String'>
+    readonly fieldId: FieldRef<"TaskFieldValue", 'String'>
+    readonly value: FieldRef<"TaskFieldValue", 'String'>
+    readonly createdAt: FieldRef<"TaskFieldValue", 'DateTime'>
+    readonly updatedAt: FieldRef<"TaskFieldValue", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TaskFieldValue findUnique
+   */
+  export type TaskFieldValueFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TaskFieldValue
+     */
+    select?: TaskFieldValueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TaskFieldValue
+     */
+    omit?: TaskFieldValueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TaskFieldValueInclude<ExtArgs> | null
+    /**
+     * Filter, which TaskFieldValue to fetch.
+     */
+    where: TaskFieldValueWhereUniqueInput
+  }
+
+  /**
+   * TaskFieldValue findUniqueOrThrow
+   */
+  export type TaskFieldValueFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TaskFieldValue
+     */
+    select?: TaskFieldValueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TaskFieldValue
+     */
+    omit?: TaskFieldValueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TaskFieldValueInclude<ExtArgs> | null
+    /**
+     * Filter, which TaskFieldValue to fetch.
+     */
+    where: TaskFieldValueWhereUniqueInput
+  }
+
+  /**
+   * TaskFieldValue findFirst
+   */
+  export type TaskFieldValueFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TaskFieldValue
+     */
+    select?: TaskFieldValueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TaskFieldValue
+     */
+    omit?: TaskFieldValueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TaskFieldValueInclude<ExtArgs> | null
+    /**
+     * Filter, which TaskFieldValue to fetch.
+     */
+    where?: TaskFieldValueWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TaskFieldValues to fetch.
+     */
+    orderBy?: TaskFieldValueOrderByWithRelationInput | TaskFieldValueOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TaskFieldValues.
+     */
+    cursor?: TaskFieldValueWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TaskFieldValues from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TaskFieldValues.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TaskFieldValues.
+     */
+    distinct?: TaskFieldValueScalarFieldEnum | TaskFieldValueScalarFieldEnum[]
+  }
+
+  /**
+   * TaskFieldValue findFirstOrThrow
+   */
+  export type TaskFieldValueFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TaskFieldValue
+     */
+    select?: TaskFieldValueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TaskFieldValue
+     */
+    omit?: TaskFieldValueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TaskFieldValueInclude<ExtArgs> | null
+    /**
+     * Filter, which TaskFieldValue to fetch.
+     */
+    where?: TaskFieldValueWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TaskFieldValues to fetch.
+     */
+    orderBy?: TaskFieldValueOrderByWithRelationInput | TaskFieldValueOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TaskFieldValues.
+     */
+    cursor?: TaskFieldValueWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TaskFieldValues from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TaskFieldValues.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TaskFieldValues.
+     */
+    distinct?: TaskFieldValueScalarFieldEnum | TaskFieldValueScalarFieldEnum[]
+  }
+
+  /**
+   * TaskFieldValue findMany
+   */
+  export type TaskFieldValueFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TaskFieldValue
+     */
+    select?: TaskFieldValueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TaskFieldValue
+     */
+    omit?: TaskFieldValueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TaskFieldValueInclude<ExtArgs> | null
+    /**
+     * Filter, which TaskFieldValues to fetch.
+     */
+    where?: TaskFieldValueWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TaskFieldValues to fetch.
+     */
+    orderBy?: TaskFieldValueOrderByWithRelationInput | TaskFieldValueOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TaskFieldValues.
+     */
+    cursor?: TaskFieldValueWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TaskFieldValues from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TaskFieldValues.
+     */
+    skip?: number
+    distinct?: TaskFieldValueScalarFieldEnum | TaskFieldValueScalarFieldEnum[]
+  }
+
+  /**
+   * TaskFieldValue create
+   */
+  export type TaskFieldValueCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TaskFieldValue
+     */
+    select?: TaskFieldValueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TaskFieldValue
+     */
+    omit?: TaskFieldValueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TaskFieldValueInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TaskFieldValue.
+     */
+    data: XOR<TaskFieldValueCreateInput, TaskFieldValueUncheckedCreateInput>
+  }
+
+  /**
+   * TaskFieldValue createMany
+   */
+  export type TaskFieldValueCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TaskFieldValues.
+     */
+    data: TaskFieldValueCreateManyInput | TaskFieldValueCreateManyInput[]
+  }
+
+  /**
+   * TaskFieldValue createManyAndReturn
+   */
+  export type TaskFieldValueCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TaskFieldValue
+     */
+    select?: TaskFieldValueSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TaskFieldValue
+     */
+    omit?: TaskFieldValueOmit<ExtArgs> | null
+    /**
+     * The data used to create many TaskFieldValues.
+     */
+    data: TaskFieldValueCreateManyInput | TaskFieldValueCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TaskFieldValueIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TaskFieldValue update
+   */
+  export type TaskFieldValueUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TaskFieldValue
+     */
+    select?: TaskFieldValueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TaskFieldValue
+     */
+    omit?: TaskFieldValueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TaskFieldValueInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TaskFieldValue.
+     */
+    data: XOR<TaskFieldValueUpdateInput, TaskFieldValueUncheckedUpdateInput>
+    /**
+     * Choose, which TaskFieldValue to update.
+     */
+    where: TaskFieldValueWhereUniqueInput
+  }
+
+  /**
+   * TaskFieldValue updateMany
+   */
+  export type TaskFieldValueUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TaskFieldValues.
+     */
+    data: XOR<TaskFieldValueUpdateManyMutationInput, TaskFieldValueUncheckedUpdateManyInput>
+    /**
+     * Filter which TaskFieldValues to update
+     */
+    where?: TaskFieldValueWhereInput
+    /**
+     * Limit how many TaskFieldValues to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TaskFieldValue updateManyAndReturn
+   */
+  export type TaskFieldValueUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TaskFieldValue
+     */
+    select?: TaskFieldValueSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TaskFieldValue
+     */
+    omit?: TaskFieldValueOmit<ExtArgs> | null
+    /**
+     * The data used to update TaskFieldValues.
+     */
+    data: XOR<TaskFieldValueUpdateManyMutationInput, TaskFieldValueUncheckedUpdateManyInput>
+    /**
+     * Filter which TaskFieldValues to update
+     */
+    where?: TaskFieldValueWhereInput
+    /**
+     * Limit how many TaskFieldValues to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TaskFieldValueIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TaskFieldValue upsert
+   */
+  export type TaskFieldValueUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TaskFieldValue
+     */
+    select?: TaskFieldValueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TaskFieldValue
+     */
+    omit?: TaskFieldValueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TaskFieldValueInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TaskFieldValue to update in case it exists.
+     */
+    where: TaskFieldValueWhereUniqueInput
+    /**
+     * In case the TaskFieldValue found by the `where` argument doesn't exist, create a new TaskFieldValue with this data.
+     */
+    create: XOR<TaskFieldValueCreateInput, TaskFieldValueUncheckedCreateInput>
+    /**
+     * In case the TaskFieldValue was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TaskFieldValueUpdateInput, TaskFieldValueUncheckedUpdateInput>
+  }
+
+  /**
+   * TaskFieldValue delete
+   */
+  export type TaskFieldValueDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TaskFieldValue
+     */
+    select?: TaskFieldValueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TaskFieldValue
+     */
+    omit?: TaskFieldValueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TaskFieldValueInclude<ExtArgs> | null
+    /**
+     * Filter which TaskFieldValue to delete.
+     */
+    where: TaskFieldValueWhereUniqueInput
+  }
+
+  /**
+   * TaskFieldValue deleteMany
+   */
+  export type TaskFieldValueDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TaskFieldValues to delete
+     */
+    where?: TaskFieldValueWhereInput
+    /**
+     * Limit how many TaskFieldValues to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TaskFieldValue without action
+   */
+  export type TaskFieldValueDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TaskFieldValue
+     */
+    select?: TaskFieldValueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TaskFieldValue
+     */
+    omit?: TaskFieldValueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TaskFieldValueInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -13208,7 +15677,6 @@ export namespace Prisma {
     status: 'status',
     categoryId: 'categoryId',
     parentId: 'parentId',
-    startDate: 'startDate',
     dueDate: 'dueDate',
     completedAt: 'completedAt',
     npc: 'npc',
@@ -13303,6 +15771,32 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+  export const CustomFieldScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    key: 'key',
+    type: 'type',
+    options: 'options',
+    sortOrder: 'sortOrder',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CustomFieldScalarFieldEnum = (typeof CustomFieldScalarFieldEnum)[keyof typeof CustomFieldScalarFieldEnum]
+
+
+  export const TaskFieldValueScalarFieldEnum: {
+    id: 'id',
+    taskId: 'taskId',
+    fieldId: 'fieldId',
+    value: 'value',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TaskFieldValueScalarFieldEnum = (typeof TaskFieldValueScalarFieldEnum)[keyof typeof TaskFieldValueScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -13377,6 +15871,13 @@ export namespace Prisma {
    * Reference to a field of type 'ReminderTiming'
    */
   export type EnumReminderTimingFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReminderTiming'>
+    
+
+
+  /**
+   * Reference to a field of type 'CustomFieldType'
+   */
+  export type EnumCustomFieldTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CustomFieldType'>
     
 
 
@@ -13597,7 +16098,6 @@ export namespace Prisma {
     status?: EnumTaskStatusFilter<"Task"> | $Enums.TaskStatus
     categoryId?: StringNullableFilter<"Task"> | string | null
     parentId?: StringNullableFilter<"Task"> | string | null
-    startDate?: DateTimeNullableFilter<"Task"> | Date | string | null
     dueDate?: DateTimeNullableFilter<"Task"> | Date | string | null
     completedAt?: DateTimeNullableFilter<"Task"> | Date | string | null
     npc?: StringNullableFilter<"Task"> | string | null
@@ -13613,6 +16113,7 @@ export namespace Prisma {
     parent?: XOR<TaskNullableScalarRelationFilter, TaskWhereInput> | null
     children?: TaskListRelationFilter
     category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
+    fieldValues?: TaskFieldValueListRelationFilter
   }
 
   export type TaskOrderByWithRelationInput = {
@@ -13622,7 +16123,6 @@ export namespace Prisma {
     status?: SortOrder
     categoryId?: SortOrderInput | SortOrder
     parentId?: SortOrderInput | SortOrder
-    startDate?: SortOrderInput | SortOrder
     dueDate?: SortOrderInput | SortOrder
     completedAt?: SortOrderInput | SortOrder
     npc?: SortOrderInput | SortOrder
@@ -13638,6 +16138,7 @@ export namespace Prisma {
     parent?: TaskOrderByWithRelationInput
     children?: TaskOrderByRelationAggregateInput
     category?: CategoryOrderByWithRelationInput
+    fieldValues?: TaskFieldValueOrderByRelationAggregateInput
   }
 
   export type TaskWhereUniqueInput = Prisma.AtLeast<{
@@ -13650,7 +16151,6 @@ export namespace Prisma {
     status?: EnumTaskStatusFilter<"Task"> | $Enums.TaskStatus
     categoryId?: StringNullableFilter<"Task"> | string | null
     parentId?: StringNullableFilter<"Task"> | string | null
-    startDate?: DateTimeNullableFilter<"Task"> | Date | string | null
     dueDate?: DateTimeNullableFilter<"Task"> | Date | string | null
     completedAt?: DateTimeNullableFilter<"Task"> | Date | string | null
     npc?: StringNullableFilter<"Task"> | string | null
@@ -13666,6 +16166,7 @@ export namespace Prisma {
     parent?: XOR<TaskNullableScalarRelationFilter, TaskWhereInput> | null
     children?: TaskListRelationFilter
     category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
+    fieldValues?: TaskFieldValueListRelationFilter
   }, "id">
 
   export type TaskOrderByWithAggregationInput = {
@@ -13675,7 +16176,6 @@ export namespace Prisma {
     status?: SortOrder
     categoryId?: SortOrderInput | SortOrder
     parentId?: SortOrderInput | SortOrder
-    startDate?: SortOrderInput | SortOrder
     dueDate?: SortOrderInput | SortOrder
     completedAt?: SortOrderInput | SortOrder
     npc?: SortOrderInput | SortOrder
@@ -13701,7 +16201,6 @@ export namespace Prisma {
     status?: EnumTaskStatusWithAggregatesFilter<"Task"> | $Enums.TaskStatus
     categoryId?: StringNullableWithAggregatesFilter<"Task"> | string | null
     parentId?: StringNullableWithAggregatesFilter<"Task"> | string | null
-    startDate?: DateTimeNullableWithAggregatesFilter<"Task"> | Date | string | null
     dueDate?: DateTimeNullableWithAggregatesFilter<"Task"> | Date | string | null
     completedAt?: DateTimeNullableWithAggregatesFilter<"Task"> | Date | string | null
     npc?: StringNullableWithAggregatesFilter<"Task"> | string | null
@@ -14117,6 +16616,142 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
+  export type CustomFieldWhereInput = {
+    AND?: CustomFieldWhereInput | CustomFieldWhereInput[]
+    OR?: CustomFieldWhereInput[]
+    NOT?: CustomFieldWhereInput | CustomFieldWhereInput[]
+    id?: StringFilter<"CustomField"> | string
+    name?: StringFilter<"CustomField"> | string
+    key?: StringFilter<"CustomField"> | string
+    type?: EnumCustomFieldTypeFilter<"CustomField"> | $Enums.CustomFieldType
+    options?: StringNullableFilter<"CustomField"> | string | null
+    sortOrder?: IntFilter<"CustomField"> | number
+    createdAt?: DateTimeFilter<"CustomField"> | Date | string
+    updatedAt?: DateTimeFilter<"CustomField"> | Date | string
+    values?: TaskFieldValueListRelationFilter
+  }
+
+  export type CustomFieldOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    key?: SortOrder
+    type?: SortOrder
+    options?: SortOrderInput | SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    values?: TaskFieldValueOrderByRelationAggregateInput
+  }
+
+  export type CustomFieldWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    key?: string
+    AND?: CustomFieldWhereInput | CustomFieldWhereInput[]
+    OR?: CustomFieldWhereInput[]
+    NOT?: CustomFieldWhereInput | CustomFieldWhereInput[]
+    name?: StringFilter<"CustomField"> | string
+    type?: EnumCustomFieldTypeFilter<"CustomField"> | $Enums.CustomFieldType
+    options?: StringNullableFilter<"CustomField"> | string | null
+    sortOrder?: IntFilter<"CustomField"> | number
+    createdAt?: DateTimeFilter<"CustomField"> | Date | string
+    updatedAt?: DateTimeFilter<"CustomField"> | Date | string
+    values?: TaskFieldValueListRelationFilter
+  }, "id" | "key">
+
+  export type CustomFieldOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    key?: SortOrder
+    type?: SortOrder
+    options?: SortOrderInput | SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: CustomFieldCountOrderByAggregateInput
+    _avg?: CustomFieldAvgOrderByAggregateInput
+    _max?: CustomFieldMaxOrderByAggregateInput
+    _min?: CustomFieldMinOrderByAggregateInput
+    _sum?: CustomFieldSumOrderByAggregateInput
+  }
+
+  export type CustomFieldScalarWhereWithAggregatesInput = {
+    AND?: CustomFieldScalarWhereWithAggregatesInput | CustomFieldScalarWhereWithAggregatesInput[]
+    OR?: CustomFieldScalarWhereWithAggregatesInput[]
+    NOT?: CustomFieldScalarWhereWithAggregatesInput | CustomFieldScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CustomField"> | string
+    name?: StringWithAggregatesFilter<"CustomField"> | string
+    key?: StringWithAggregatesFilter<"CustomField"> | string
+    type?: EnumCustomFieldTypeWithAggregatesFilter<"CustomField"> | $Enums.CustomFieldType
+    options?: StringNullableWithAggregatesFilter<"CustomField"> | string | null
+    sortOrder?: IntWithAggregatesFilter<"CustomField"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"CustomField"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"CustomField"> | Date | string
+  }
+
+  export type TaskFieldValueWhereInput = {
+    AND?: TaskFieldValueWhereInput | TaskFieldValueWhereInput[]
+    OR?: TaskFieldValueWhereInput[]
+    NOT?: TaskFieldValueWhereInput | TaskFieldValueWhereInput[]
+    id?: StringFilter<"TaskFieldValue"> | string
+    taskId?: StringFilter<"TaskFieldValue"> | string
+    fieldId?: StringFilter<"TaskFieldValue"> | string
+    value?: StringNullableFilter<"TaskFieldValue"> | string | null
+    createdAt?: DateTimeFilter<"TaskFieldValue"> | Date | string
+    updatedAt?: DateTimeFilter<"TaskFieldValue"> | Date | string
+    task?: XOR<TaskScalarRelationFilter, TaskWhereInput>
+    field?: XOR<CustomFieldScalarRelationFilter, CustomFieldWhereInput>
+  }
+
+  export type TaskFieldValueOrderByWithRelationInput = {
+    id?: SortOrder
+    taskId?: SortOrder
+    fieldId?: SortOrder
+    value?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    task?: TaskOrderByWithRelationInput
+    field?: CustomFieldOrderByWithRelationInput
+  }
+
+  export type TaskFieldValueWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    taskId_fieldId?: TaskFieldValueTaskIdFieldIdCompoundUniqueInput
+    AND?: TaskFieldValueWhereInput | TaskFieldValueWhereInput[]
+    OR?: TaskFieldValueWhereInput[]
+    NOT?: TaskFieldValueWhereInput | TaskFieldValueWhereInput[]
+    taskId?: StringFilter<"TaskFieldValue"> | string
+    fieldId?: StringFilter<"TaskFieldValue"> | string
+    value?: StringNullableFilter<"TaskFieldValue"> | string | null
+    createdAt?: DateTimeFilter<"TaskFieldValue"> | Date | string
+    updatedAt?: DateTimeFilter<"TaskFieldValue"> | Date | string
+    task?: XOR<TaskScalarRelationFilter, TaskWhereInput>
+    field?: XOR<CustomFieldScalarRelationFilter, CustomFieldWhereInput>
+  }, "id" | "taskId_fieldId">
+
+  export type TaskFieldValueOrderByWithAggregationInput = {
+    id?: SortOrder
+    taskId?: SortOrder
+    fieldId?: SortOrder
+    value?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TaskFieldValueCountOrderByAggregateInput
+    _max?: TaskFieldValueMaxOrderByAggregateInput
+    _min?: TaskFieldValueMinOrderByAggregateInput
+  }
+
+  export type TaskFieldValueScalarWhereWithAggregatesInput = {
+    AND?: TaskFieldValueScalarWhereWithAggregatesInput | TaskFieldValueScalarWhereWithAggregatesInput[]
+    OR?: TaskFieldValueScalarWhereWithAggregatesInput[]
+    NOT?: TaskFieldValueScalarWhereWithAggregatesInput | TaskFieldValueScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TaskFieldValue"> | string
+    taskId?: StringWithAggregatesFilter<"TaskFieldValue"> | string
+    fieldId?: StringWithAggregatesFilter<"TaskFieldValue"> | string
+    value?: StringNullableWithAggregatesFilter<"TaskFieldValue"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"TaskFieldValue"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"TaskFieldValue"> | Date | string
+  }
+
   export type CategoryCreateInput = {
     id?: string
     name: string
@@ -14327,7 +16962,6 @@ export namespace Prisma {
     title: string
     description?: string | null
     status?: $Enums.TaskStatus
-    startDate?: Date | string | null
     dueDate?: Date | string | null
     completedAt?: Date | string | null
     npc?: string | null
@@ -14343,6 +16977,7 @@ export namespace Prisma {
     parent?: TaskCreateNestedOneWithoutChildrenInput
     children?: TaskCreateNestedManyWithoutParentInput
     category?: CategoryCreateNestedOneWithoutTasksInput
+    fieldValues?: TaskFieldValueCreateNestedManyWithoutTaskInput
   }
 
   export type TaskUncheckedCreateInput = {
@@ -14352,7 +16987,6 @@ export namespace Prisma {
     status?: $Enums.TaskStatus
     categoryId?: string | null
     parentId?: string | null
-    startDate?: Date | string | null
     dueDate?: Date | string | null
     completedAt?: Date | string | null
     npc?: string | null
@@ -14366,6 +17000,7 @@ export namespace Prisma {
     reminders?: ReminderUncheckedCreateNestedManyWithoutTaskInput
     taskTags?: TaskTagUncheckedCreateNestedManyWithoutTaskInput
     children?: TaskUncheckedCreateNestedManyWithoutParentInput
+    fieldValues?: TaskFieldValueUncheckedCreateNestedManyWithoutTaskInput
   }
 
   export type TaskUpdateInput = {
@@ -14373,7 +17008,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     npc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14389,6 +17023,7 @@ export namespace Prisma {
     parent?: TaskUpdateOneWithoutChildrenNestedInput
     children?: TaskUpdateManyWithoutParentNestedInput
     category?: CategoryUpdateOneWithoutTasksNestedInput
+    fieldValues?: TaskFieldValueUpdateManyWithoutTaskNestedInput
   }
 
   export type TaskUncheckedUpdateInput = {
@@ -14398,7 +17033,6 @@ export namespace Prisma {
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     npc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14412,6 +17046,7 @@ export namespace Prisma {
     reminders?: ReminderUncheckedUpdateManyWithoutTaskNestedInput
     taskTags?: TaskTagUncheckedUpdateManyWithoutTaskNestedInput
     children?: TaskUncheckedUpdateManyWithoutParentNestedInput
+    fieldValues?: TaskFieldValueUncheckedUpdateManyWithoutTaskNestedInput
   }
 
   export type TaskCreateManyInput = {
@@ -14421,7 +17056,6 @@ export namespace Prisma {
     status?: $Enums.TaskStatus
     categoryId?: string | null
     parentId?: string | null
-    startDate?: Date | string | null
     dueDate?: Date | string | null
     completedAt?: Date | string | null
     npc?: string | null
@@ -14437,7 +17071,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     npc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14455,7 +17088,6 @@ export namespace Prisma {
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     npc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14907,6 +17539,148 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type CustomFieldCreateInput = {
+    id?: string
+    name: string
+    key: string
+    type: $Enums.CustomFieldType
+    options?: string | null
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    values?: TaskFieldValueCreateNestedManyWithoutFieldInput
+  }
+
+  export type CustomFieldUncheckedCreateInput = {
+    id?: string
+    name: string
+    key: string
+    type: $Enums.CustomFieldType
+    options?: string | null
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    values?: TaskFieldValueUncheckedCreateNestedManyWithoutFieldInput
+  }
+
+  export type CustomFieldUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    type?: EnumCustomFieldTypeFieldUpdateOperationsInput | $Enums.CustomFieldType
+    options?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    values?: TaskFieldValueUpdateManyWithoutFieldNestedInput
+  }
+
+  export type CustomFieldUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    type?: EnumCustomFieldTypeFieldUpdateOperationsInput | $Enums.CustomFieldType
+    options?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    values?: TaskFieldValueUncheckedUpdateManyWithoutFieldNestedInput
+  }
+
+  export type CustomFieldCreateManyInput = {
+    id?: string
+    name: string
+    key: string
+    type: $Enums.CustomFieldType
+    options?: string | null
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CustomFieldUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    type?: EnumCustomFieldTypeFieldUpdateOperationsInput | $Enums.CustomFieldType
+    options?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomFieldUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    type?: EnumCustomFieldTypeFieldUpdateOperationsInput | $Enums.CustomFieldType
+    options?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TaskFieldValueCreateInput = {
+    id?: string
+    value?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    task: TaskCreateNestedOneWithoutFieldValuesInput
+    field: CustomFieldCreateNestedOneWithoutValuesInput
+  }
+
+  export type TaskFieldValueUncheckedCreateInput = {
+    id?: string
+    taskId: string
+    fieldId: string
+    value?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TaskFieldValueUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    task?: TaskUpdateOneRequiredWithoutFieldValuesNestedInput
+    field?: CustomFieldUpdateOneRequiredWithoutValuesNestedInput
+  }
+
+  export type TaskFieldValueUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    taskId?: StringFieldUpdateOperationsInput | string
+    fieldId?: StringFieldUpdateOperationsInput | string
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TaskFieldValueCreateManyInput = {
+    id?: string
+    taskId: string
+    fieldId: string
+    value?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TaskFieldValueUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TaskFieldValueUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    taskId?: StringFieldUpdateOperationsInput | string
+    fieldId?: StringFieldUpdateOperationsInput | string
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -15223,11 +17997,21 @@ export namespace Prisma {
     isNot?: TaskWhereInput | null
   }
 
+  export type TaskFieldValueListRelationFilter = {
+    every?: TaskFieldValueWhereInput
+    some?: TaskFieldValueWhereInput
+    none?: TaskFieldValueWhereInput
+  }
+
   export type LedgerTaskOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type ReminderOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TaskFieldValueOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -15238,7 +18022,6 @@ export namespace Prisma {
     status?: SortOrder
     categoryId?: SortOrder
     parentId?: SortOrder
-    startDate?: SortOrder
     dueDate?: SortOrder
     completedAt?: SortOrder
     npc?: SortOrder
@@ -15260,7 +18043,6 @@ export namespace Prisma {
     status?: SortOrder
     categoryId?: SortOrder
     parentId?: SortOrder
-    startDate?: SortOrder
     dueDate?: SortOrder
     completedAt?: SortOrder
     npc?: SortOrder
@@ -15278,7 +18060,6 @@ export namespace Prisma {
     status?: SortOrder
     categoryId?: SortOrder
     parentId?: SortOrder
-    startDate?: SortOrder
     dueDate?: SortOrder
     completedAt?: SortOrder
     npc?: SortOrder
@@ -15614,6 +18395,101 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type EnumCustomFieldTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.CustomFieldType | EnumCustomFieldTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CustomFieldType[]
+    notIn?: $Enums.CustomFieldType[]
+    not?: NestedEnumCustomFieldTypeFilter<$PrismaModel> | $Enums.CustomFieldType
+  }
+
+  export type CustomFieldCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    key?: SortOrder
+    type?: SortOrder
+    options?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CustomFieldAvgOrderByAggregateInput = {
+    sortOrder?: SortOrder
+  }
+
+  export type CustomFieldMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    key?: SortOrder
+    type?: SortOrder
+    options?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CustomFieldMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    key?: SortOrder
+    type?: SortOrder
+    options?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CustomFieldSumOrderByAggregateInput = {
+    sortOrder?: SortOrder
+  }
+
+  export type EnumCustomFieldTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CustomFieldType | EnumCustomFieldTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CustomFieldType[]
+    notIn?: $Enums.CustomFieldType[]
+    not?: NestedEnumCustomFieldTypeWithAggregatesFilter<$PrismaModel> | $Enums.CustomFieldType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCustomFieldTypeFilter<$PrismaModel>
+    _max?: NestedEnumCustomFieldTypeFilter<$PrismaModel>
+  }
+
+  export type CustomFieldScalarRelationFilter = {
+    is?: CustomFieldWhereInput
+    isNot?: CustomFieldWhereInput
+  }
+
+  export type TaskFieldValueTaskIdFieldIdCompoundUniqueInput = {
+    taskId: string
+    fieldId: string
+  }
+
+  export type TaskFieldValueCountOrderByAggregateInput = {
+    id?: SortOrder
+    taskId?: SortOrder
+    fieldId?: SortOrder
+    value?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TaskFieldValueMaxOrderByAggregateInput = {
+    id?: SortOrder
+    taskId?: SortOrder
+    fieldId?: SortOrder
+    value?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TaskFieldValueMinOrderByAggregateInput = {
+    id?: SortOrder
+    taskId?: SortOrder
+    fieldId?: SortOrder
+    value?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type CategoryCreateNestedOneWithoutChildrenInput = {
     create?: XOR<CategoryCreateWithoutChildrenInput, CategoryUncheckedCreateWithoutChildrenInput>
     connectOrCreate?: CategoryCreateOrConnectWithoutChildrenInput
@@ -15854,6 +18730,13 @@ export namespace Prisma {
     connect?: CategoryWhereUniqueInput
   }
 
+  export type TaskFieldValueCreateNestedManyWithoutTaskInput = {
+    create?: XOR<TaskFieldValueCreateWithoutTaskInput, TaskFieldValueUncheckedCreateWithoutTaskInput> | TaskFieldValueCreateWithoutTaskInput[] | TaskFieldValueUncheckedCreateWithoutTaskInput[]
+    connectOrCreate?: TaskFieldValueCreateOrConnectWithoutTaskInput | TaskFieldValueCreateOrConnectWithoutTaskInput[]
+    createMany?: TaskFieldValueCreateManyTaskInputEnvelope
+    connect?: TaskFieldValueWhereUniqueInput | TaskFieldValueWhereUniqueInput[]
+  }
+
   export type LedgerTaskUncheckedCreateNestedManyWithoutTaskInput = {
     create?: XOR<LedgerTaskCreateWithoutTaskInput, LedgerTaskUncheckedCreateWithoutTaskInput> | LedgerTaskCreateWithoutTaskInput[] | LedgerTaskUncheckedCreateWithoutTaskInput[]
     connectOrCreate?: LedgerTaskCreateOrConnectWithoutTaskInput | LedgerTaskCreateOrConnectWithoutTaskInput[]
@@ -15886,6 +18769,13 @@ export namespace Prisma {
     connectOrCreate?: TaskCreateOrConnectWithoutParentInput | TaskCreateOrConnectWithoutParentInput[]
     createMany?: TaskCreateManyParentInputEnvelope
     connect?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+  }
+
+  export type TaskFieldValueUncheckedCreateNestedManyWithoutTaskInput = {
+    create?: XOR<TaskFieldValueCreateWithoutTaskInput, TaskFieldValueUncheckedCreateWithoutTaskInput> | TaskFieldValueCreateWithoutTaskInput[] | TaskFieldValueUncheckedCreateWithoutTaskInput[]
+    connectOrCreate?: TaskFieldValueCreateOrConnectWithoutTaskInput | TaskFieldValueCreateOrConnectWithoutTaskInput[]
+    createMany?: TaskFieldValueCreateManyTaskInputEnvelope
+    connect?: TaskFieldValueWhereUniqueInput | TaskFieldValueWhereUniqueInput[]
   }
 
   export type EnumTaskStatusFieldUpdateOperationsInput = {
@@ -15982,6 +18872,20 @@ export namespace Prisma {
     update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutTasksInput, CategoryUpdateWithoutTasksInput>, CategoryUncheckedUpdateWithoutTasksInput>
   }
 
+  export type TaskFieldValueUpdateManyWithoutTaskNestedInput = {
+    create?: XOR<TaskFieldValueCreateWithoutTaskInput, TaskFieldValueUncheckedCreateWithoutTaskInput> | TaskFieldValueCreateWithoutTaskInput[] | TaskFieldValueUncheckedCreateWithoutTaskInput[]
+    connectOrCreate?: TaskFieldValueCreateOrConnectWithoutTaskInput | TaskFieldValueCreateOrConnectWithoutTaskInput[]
+    upsert?: TaskFieldValueUpsertWithWhereUniqueWithoutTaskInput | TaskFieldValueUpsertWithWhereUniqueWithoutTaskInput[]
+    createMany?: TaskFieldValueCreateManyTaskInputEnvelope
+    set?: TaskFieldValueWhereUniqueInput | TaskFieldValueWhereUniqueInput[]
+    disconnect?: TaskFieldValueWhereUniqueInput | TaskFieldValueWhereUniqueInput[]
+    delete?: TaskFieldValueWhereUniqueInput | TaskFieldValueWhereUniqueInput[]
+    connect?: TaskFieldValueWhereUniqueInput | TaskFieldValueWhereUniqueInput[]
+    update?: TaskFieldValueUpdateWithWhereUniqueWithoutTaskInput | TaskFieldValueUpdateWithWhereUniqueWithoutTaskInput[]
+    updateMany?: TaskFieldValueUpdateManyWithWhereWithoutTaskInput | TaskFieldValueUpdateManyWithWhereWithoutTaskInput[]
+    deleteMany?: TaskFieldValueScalarWhereInput | TaskFieldValueScalarWhereInput[]
+  }
+
   export type LedgerTaskUncheckedUpdateManyWithoutTaskNestedInput = {
     create?: XOR<LedgerTaskCreateWithoutTaskInput, LedgerTaskUncheckedCreateWithoutTaskInput> | LedgerTaskCreateWithoutTaskInput[] | LedgerTaskUncheckedCreateWithoutTaskInput[]
     connectOrCreate?: LedgerTaskCreateOrConnectWithoutTaskInput | LedgerTaskCreateOrConnectWithoutTaskInput[]
@@ -16046,6 +18950,20 @@ export namespace Prisma {
     update?: TaskUpdateWithWhereUniqueWithoutParentInput | TaskUpdateWithWhereUniqueWithoutParentInput[]
     updateMany?: TaskUpdateManyWithWhereWithoutParentInput | TaskUpdateManyWithWhereWithoutParentInput[]
     deleteMany?: TaskScalarWhereInput | TaskScalarWhereInput[]
+  }
+
+  export type TaskFieldValueUncheckedUpdateManyWithoutTaskNestedInput = {
+    create?: XOR<TaskFieldValueCreateWithoutTaskInput, TaskFieldValueUncheckedCreateWithoutTaskInput> | TaskFieldValueCreateWithoutTaskInput[] | TaskFieldValueUncheckedCreateWithoutTaskInput[]
+    connectOrCreate?: TaskFieldValueCreateOrConnectWithoutTaskInput | TaskFieldValueCreateOrConnectWithoutTaskInput[]
+    upsert?: TaskFieldValueUpsertWithWhereUniqueWithoutTaskInput | TaskFieldValueUpsertWithWhereUniqueWithoutTaskInput[]
+    createMany?: TaskFieldValueCreateManyTaskInputEnvelope
+    set?: TaskFieldValueWhereUniqueInput | TaskFieldValueWhereUniqueInput[]
+    disconnect?: TaskFieldValueWhereUniqueInput | TaskFieldValueWhereUniqueInput[]
+    delete?: TaskFieldValueWhereUniqueInput | TaskFieldValueWhereUniqueInput[]
+    connect?: TaskFieldValueWhereUniqueInput | TaskFieldValueWhereUniqueInput[]
+    update?: TaskFieldValueUpdateWithWhereUniqueWithoutTaskInput | TaskFieldValueUpdateWithWhereUniqueWithoutTaskInput[]
+    updateMany?: TaskFieldValueUpdateManyWithWhereWithoutTaskInput | TaskFieldValueUpdateManyWithWhereWithoutTaskInput[]
+    deleteMany?: TaskFieldValueScalarWhereInput | TaskFieldValueScalarWhereInput[]
   }
 
   export type TaskCreateNestedOneWithoutRecurringTaskInput = {
@@ -16164,6 +19082,80 @@ export namespace Prisma {
     upsert?: TaskUpsertWithoutRemindersInput
     connect?: TaskWhereUniqueInput
     update?: XOR<XOR<TaskUpdateToOneWithWhereWithoutRemindersInput, TaskUpdateWithoutRemindersInput>, TaskUncheckedUpdateWithoutRemindersInput>
+  }
+
+  export type TaskFieldValueCreateNestedManyWithoutFieldInput = {
+    create?: XOR<TaskFieldValueCreateWithoutFieldInput, TaskFieldValueUncheckedCreateWithoutFieldInput> | TaskFieldValueCreateWithoutFieldInput[] | TaskFieldValueUncheckedCreateWithoutFieldInput[]
+    connectOrCreate?: TaskFieldValueCreateOrConnectWithoutFieldInput | TaskFieldValueCreateOrConnectWithoutFieldInput[]
+    createMany?: TaskFieldValueCreateManyFieldInputEnvelope
+    connect?: TaskFieldValueWhereUniqueInput | TaskFieldValueWhereUniqueInput[]
+  }
+
+  export type TaskFieldValueUncheckedCreateNestedManyWithoutFieldInput = {
+    create?: XOR<TaskFieldValueCreateWithoutFieldInput, TaskFieldValueUncheckedCreateWithoutFieldInput> | TaskFieldValueCreateWithoutFieldInput[] | TaskFieldValueUncheckedCreateWithoutFieldInput[]
+    connectOrCreate?: TaskFieldValueCreateOrConnectWithoutFieldInput | TaskFieldValueCreateOrConnectWithoutFieldInput[]
+    createMany?: TaskFieldValueCreateManyFieldInputEnvelope
+    connect?: TaskFieldValueWhereUniqueInput | TaskFieldValueWhereUniqueInput[]
+  }
+
+  export type EnumCustomFieldTypeFieldUpdateOperationsInput = {
+    set?: $Enums.CustomFieldType
+  }
+
+  export type TaskFieldValueUpdateManyWithoutFieldNestedInput = {
+    create?: XOR<TaskFieldValueCreateWithoutFieldInput, TaskFieldValueUncheckedCreateWithoutFieldInput> | TaskFieldValueCreateWithoutFieldInput[] | TaskFieldValueUncheckedCreateWithoutFieldInput[]
+    connectOrCreate?: TaskFieldValueCreateOrConnectWithoutFieldInput | TaskFieldValueCreateOrConnectWithoutFieldInput[]
+    upsert?: TaskFieldValueUpsertWithWhereUniqueWithoutFieldInput | TaskFieldValueUpsertWithWhereUniqueWithoutFieldInput[]
+    createMany?: TaskFieldValueCreateManyFieldInputEnvelope
+    set?: TaskFieldValueWhereUniqueInput | TaskFieldValueWhereUniqueInput[]
+    disconnect?: TaskFieldValueWhereUniqueInput | TaskFieldValueWhereUniqueInput[]
+    delete?: TaskFieldValueWhereUniqueInput | TaskFieldValueWhereUniqueInput[]
+    connect?: TaskFieldValueWhereUniqueInput | TaskFieldValueWhereUniqueInput[]
+    update?: TaskFieldValueUpdateWithWhereUniqueWithoutFieldInput | TaskFieldValueUpdateWithWhereUniqueWithoutFieldInput[]
+    updateMany?: TaskFieldValueUpdateManyWithWhereWithoutFieldInput | TaskFieldValueUpdateManyWithWhereWithoutFieldInput[]
+    deleteMany?: TaskFieldValueScalarWhereInput | TaskFieldValueScalarWhereInput[]
+  }
+
+  export type TaskFieldValueUncheckedUpdateManyWithoutFieldNestedInput = {
+    create?: XOR<TaskFieldValueCreateWithoutFieldInput, TaskFieldValueUncheckedCreateWithoutFieldInput> | TaskFieldValueCreateWithoutFieldInput[] | TaskFieldValueUncheckedCreateWithoutFieldInput[]
+    connectOrCreate?: TaskFieldValueCreateOrConnectWithoutFieldInput | TaskFieldValueCreateOrConnectWithoutFieldInput[]
+    upsert?: TaskFieldValueUpsertWithWhereUniqueWithoutFieldInput | TaskFieldValueUpsertWithWhereUniqueWithoutFieldInput[]
+    createMany?: TaskFieldValueCreateManyFieldInputEnvelope
+    set?: TaskFieldValueWhereUniqueInput | TaskFieldValueWhereUniqueInput[]
+    disconnect?: TaskFieldValueWhereUniqueInput | TaskFieldValueWhereUniqueInput[]
+    delete?: TaskFieldValueWhereUniqueInput | TaskFieldValueWhereUniqueInput[]
+    connect?: TaskFieldValueWhereUniqueInput | TaskFieldValueWhereUniqueInput[]
+    update?: TaskFieldValueUpdateWithWhereUniqueWithoutFieldInput | TaskFieldValueUpdateWithWhereUniqueWithoutFieldInput[]
+    updateMany?: TaskFieldValueUpdateManyWithWhereWithoutFieldInput | TaskFieldValueUpdateManyWithWhereWithoutFieldInput[]
+    deleteMany?: TaskFieldValueScalarWhereInput | TaskFieldValueScalarWhereInput[]
+  }
+
+  export type TaskCreateNestedOneWithoutFieldValuesInput = {
+    create?: XOR<TaskCreateWithoutFieldValuesInput, TaskUncheckedCreateWithoutFieldValuesInput>
+    connectOrCreate?: TaskCreateOrConnectWithoutFieldValuesInput
+    connect?: TaskWhereUniqueInput
+  }
+
+  export type CustomFieldCreateNestedOneWithoutValuesInput = {
+    create?: XOR<CustomFieldCreateWithoutValuesInput, CustomFieldUncheckedCreateWithoutValuesInput>
+    connectOrCreate?: CustomFieldCreateOrConnectWithoutValuesInput
+    connect?: CustomFieldWhereUniqueInput
+  }
+
+  export type TaskUpdateOneRequiredWithoutFieldValuesNestedInput = {
+    create?: XOR<TaskCreateWithoutFieldValuesInput, TaskUncheckedCreateWithoutFieldValuesInput>
+    connectOrCreate?: TaskCreateOrConnectWithoutFieldValuesInput
+    upsert?: TaskUpsertWithoutFieldValuesInput
+    connect?: TaskWhereUniqueInput
+    update?: XOR<XOR<TaskUpdateToOneWithWhereWithoutFieldValuesInput, TaskUpdateWithoutFieldValuesInput>, TaskUncheckedUpdateWithoutFieldValuesInput>
+  }
+
+  export type CustomFieldUpdateOneRequiredWithoutValuesNestedInput = {
+    create?: XOR<CustomFieldCreateWithoutValuesInput, CustomFieldUncheckedCreateWithoutValuesInput>
+    connectOrCreate?: CustomFieldCreateOrConnectWithoutValuesInput
+    upsert?: CustomFieldUpsertWithoutValuesInput
+    connect?: CustomFieldWhereUniqueInput
+    update?: XOR<XOR<CustomFieldUpdateToOneWithWhereWithoutValuesInput, CustomFieldUpdateWithoutValuesInput>, CustomFieldUncheckedUpdateWithoutValuesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -16435,6 +19427,23 @@ export namespace Prisma {
     _max?: NestedEnumReminderTimingFilter<$PrismaModel>
   }
 
+  export type NestedEnumCustomFieldTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.CustomFieldType | EnumCustomFieldTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CustomFieldType[]
+    notIn?: $Enums.CustomFieldType[]
+    not?: NestedEnumCustomFieldTypeFilter<$PrismaModel> | $Enums.CustomFieldType
+  }
+
+  export type NestedEnumCustomFieldTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CustomFieldType | EnumCustomFieldTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CustomFieldType[]
+    notIn?: $Enums.CustomFieldType[]
+    not?: NestedEnumCustomFieldTypeWithAggregatesFilter<$PrismaModel> | $Enums.CustomFieldType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCustomFieldTypeFilter<$PrismaModel>
+    _max?: NestedEnumCustomFieldTypeFilter<$PrismaModel>
+  }
+
   export type CategoryCreateWithoutChildrenInput = {
     id?: string
     name: string
@@ -16514,7 +19523,6 @@ export namespace Prisma {
     title: string
     description?: string | null
     status?: $Enums.TaskStatus
-    startDate?: Date | string | null
     dueDate?: Date | string | null
     completedAt?: Date | string | null
     npc?: string | null
@@ -16529,6 +19537,7 @@ export namespace Prisma {
     taskTags?: TaskTagCreateNestedManyWithoutTaskInput
     parent?: TaskCreateNestedOneWithoutChildrenInput
     children?: TaskCreateNestedManyWithoutParentInput
+    fieldValues?: TaskFieldValueCreateNestedManyWithoutTaskInput
   }
 
   export type TaskUncheckedCreateWithoutCategoryInput = {
@@ -16537,7 +19546,6 @@ export namespace Prisma {
     description?: string | null
     status?: $Enums.TaskStatus
     parentId?: string | null
-    startDate?: Date | string | null
     dueDate?: Date | string | null
     completedAt?: Date | string | null
     npc?: string | null
@@ -16551,6 +19559,7 @@ export namespace Prisma {
     reminders?: ReminderUncheckedCreateNestedManyWithoutTaskInput
     taskTags?: TaskTagUncheckedCreateNestedManyWithoutTaskInput
     children?: TaskUncheckedCreateNestedManyWithoutParentInput
+    fieldValues?: TaskFieldValueUncheckedCreateNestedManyWithoutTaskInput
   }
 
   export type TaskCreateOrConnectWithoutCategoryInput = {
@@ -16662,7 +19671,6 @@ export namespace Prisma {
     status?: EnumTaskStatusFilter<"Task"> | $Enums.TaskStatus
     categoryId?: StringNullableFilter<"Task"> | string | null
     parentId?: StringNullableFilter<"Task"> | string | null
-    startDate?: DateTimeNullableFilter<"Task"> | Date | string | null
     dueDate?: DateTimeNullableFilter<"Task"> | Date | string | null
     completedAt?: DateTimeNullableFilter<"Task"> | Date | string | null
     npc?: StringNullableFilter<"Task"> | string | null
@@ -16744,7 +19752,6 @@ export namespace Prisma {
     title: string
     description?: string | null
     status?: $Enums.TaskStatus
-    startDate?: Date | string | null
     dueDate?: Date | string | null
     completedAt?: Date | string | null
     npc?: string | null
@@ -16759,6 +19766,7 @@ export namespace Prisma {
     parent?: TaskCreateNestedOneWithoutChildrenInput
     children?: TaskCreateNestedManyWithoutParentInput
     category?: CategoryCreateNestedOneWithoutTasksInput
+    fieldValues?: TaskFieldValueCreateNestedManyWithoutTaskInput
   }
 
   export type TaskUncheckedCreateWithoutTaskTagsInput = {
@@ -16768,7 +19776,6 @@ export namespace Prisma {
     status?: $Enums.TaskStatus
     categoryId?: string | null
     parentId?: string | null
-    startDate?: Date | string | null
     dueDate?: Date | string | null
     completedAt?: Date | string | null
     npc?: string | null
@@ -16781,6 +19788,7 @@ export namespace Prisma {
     recurringTask?: RecurringTaskUncheckedCreateNestedOneWithoutTaskInput
     reminders?: ReminderUncheckedCreateNestedManyWithoutTaskInput
     children?: TaskUncheckedCreateNestedManyWithoutParentInput
+    fieldValues?: TaskFieldValueUncheckedCreateNestedManyWithoutTaskInput
   }
 
   export type TaskCreateOrConnectWithoutTaskTagsInput = {
@@ -16829,7 +19837,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     npc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16844,6 +19851,7 @@ export namespace Prisma {
     parent?: TaskUpdateOneWithoutChildrenNestedInput
     children?: TaskUpdateManyWithoutParentNestedInput
     category?: CategoryUpdateOneWithoutTasksNestedInput
+    fieldValues?: TaskFieldValueUpdateManyWithoutTaskNestedInput
   }
 
   export type TaskUncheckedUpdateWithoutTaskTagsInput = {
@@ -16853,7 +19861,6 @@ export namespace Prisma {
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     npc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16866,6 +19873,7 @@ export namespace Prisma {
     recurringTask?: RecurringTaskUncheckedUpdateOneWithoutTaskNestedInput
     reminders?: ReminderUncheckedUpdateManyWithoutTaskNestedInput
     children?: TaskUncheckedUpdateManyWithoutParentNestedInput
+    fieldValues?: TaskFieldValueUncheckedUpdateManyWithoutTaskNestedInput
   }
 
   export type LedgerTaskCreateWithoutTaskInput = {
@@ -16983,7 +19991,6 @@ export namespace Prisma {
     title: string
     description?: string | null
     status?: $Enums.TaskStatus
-    startDate?: Date | string | null
     dueDate?: Date | string | null
     completedAt?: Date | string | null
     npc?: string | null
@@ -16998,6 +20005,7 @@ export namespace Prisma {
     taskTags?: TaskTagCreateNestedManyWithoutTaskInput
     parent?: TaskCreateNestedOneWithoutChildrenInput
     category?: CategoryCreateNestedOneWithoutTasksInput
+    fieldValues?: TaskFieldValueCreateNestedManyWithoutTaskInput
   }
 
   export type TaskUncheckedCreateWithoutChildrenInput = {
@@ -17007,7 +20015,6 @@ export namespace Prisma {
     status?: $Enums.TaskStatus
     categoryId?: string | null
     parentId?: string | null
-    startDate?: Date | string | null
     dueDate?: Date | string | null
     completedAt?: Date | string | null
     npc?: string | null
@@ -17020,6 +20027,7 @@ export namespace Prisma {
     recurringTask?: RecurringTaskUncheckedCreateNestedOneWithoutTaskInput
     reminders?: ReminderUncheckedCreateNestedManyWithoutTaskInput
     taskTags?: TaskTagUncheckedCreateNestedManyWithoutTaskInput
+    fieldValues?: TaskFieldValueUncheckedCreateNestedManyWithoutTaskInput
   }
 
   export type TaskCreateOrConnectWithoutChildrenInput = {
@@ -17032,7 +20040,6 @@ export namespace Prisma {
     title: string
     description?: string | null
     status?: $Enums.TaskStatus
-    startDate?: Date | string | null
     dueDate?: Date | string | null
     completedAt?: Date | string | null
     npc?: string | null
@@ -17047,6 +20054,7 @@ export namespace Prisma {
     taskTags?: TaskTagCreateNestedManyWithoutTaskInput
     children?: TaskCreateNestedManyWithoutParentInput
     category?: CategoryCreateNestedOneWithoutTasksInput
+    fieldValues?: TaskFieldValueCreateNestedManyWithoutTaskInput
   }
 
   export type TaskUncheckedCreateWithoutParentInput = {
@@ -17055,7 +20063,6 @@ export namespace Prisma {
     description?: string | null
     status?: $Enums.TaskStatus
     categoryId?: string | null
-    startDate?: Date | string | null
     dueDate?: Date | string | null
     completedAt?: Date | string | null
     npc?: string | null
@@ -17069,6 +20076,7 @@ export namespace Prisma {
     reminders?: ReminderUncheckedCreateNestedManyWithoutTaskInput
     taskTags?: TaskTagUncheckedCreateNestedManyWithoutTaskInput
     children?: TaskUncheckedCreateNestedManyWithoutParentInput
+    fieldValues?: TaskFieldValueUncheckedCreateNestedManyWithoutTaskInput
   }
 
   export type TaskCreateOrConnectWithoutParentInput = {
@@ -17113,6 +20121,31 @@ export namespace Prisma {
   export type CategoryCreateOrConnectWithoutTasksInput = {
     where: CategoryWhereUniqueInput
     create: XOR<CategoryCreateWithoutTasksInput, CategoryUncheckedCreateWithoutTasksInput>
+  }
+
+  export type TaskFieldValueCreateWithoutTaskInput = {
+    id?: string
+    value?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    field: CustomFieldCreateNestedOneWithoutValuesInput
+  }
+
+  export type TaskFieldValueUncheckedCreateWithoutTaskInput = {
+    id?: string
+    fieldId: string
+    value?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TaskFieldValueCreateOrConnectWithoutTaskInput = {
+    where: TaskFieldValueWhereUniqueInput
+    create: XOR<TaskFieldValueCreateWithoutTaskInput, TaskFieldValueUncheckedCreateWithoutTaskInput>
+  }
+
+  export type TaskFieldValueCreateManyTaskInputEnvelope = {
+    data: TaskFieldValueCreateManyTaskInput | TaskFieldValueCreateManyTaskInput[]
   }
 
   export type LedgerTaskUpsertWithWhereUniqueWithoutTaskInput = {
@@ -17249,7 +20282,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     npc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17264,6 +20296,7 @@ export namespace Prisma {
     taskTags?: TaskTagUpdateManyWithoutTaskNestedInput
     parent?: TaskUpdateOneWithoutChildrenNestedInput
     category?: CategoryUpdateOneWithoutTasksNestedInput
+    fieldValues?: TaskFieldValueUpdateManyWithoutTaskNestedInput
   }
 
   export type TaskUncheckedUpdateWithoutChildrenInput = {
@@ -17273,7 +20306,6 @@ export namespace Prisma {
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     npc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17286,6 +20318,7 @@ export namespace Prisma {
     recurringTask?: RecurringTaskUncheckedUpdateOneWithoutTaskNestedInput
     reminders?: ReminderUncheckedUpdateManyWithoutTaskNestedInput
     taskTags?: TaskTagUncheckedUpdateManyWithoutTaskNestedInput
+    fieldValues?: TaskFieldValueUncheckedUpdateManyWithoutTaskNestedInput
   }
 
   export type TaskUpsertWithWhereUniqueWithoutParentInput = {
@@ -17345,12 +20378,39 @@ export namespace Prisma {
     children?: CategoryUncheckedUpdateManyWithoutParentNestedInput
   }
 
+  export type TaskFieldValueUpsertWithWhereUniqueWithoutTaskInput = {
+    where: TaskFieldValueWhereUniqueInput
+    update: XOR<TaskFieldValueUpdateWithoutTaskInput, TaskFieldValueUncheckedUpdateWithoutTaskInput>
+    create: XOR<TaskFieldValueCreateWithoutTaskInput, TaskFieldValueUncheckedCreateWithoutTaskInput>
+  }
+
+  export type TaskFieldValueUpdateWithWhereUniqueWithoutTaskInput = {
+    where: TaskFieldValueWhereUniqueInput
+    data: XOR<TaskFieldValueUpdateWithoutTaskInput, TaskFieldValueUncheckedUpdateWithoutTaskInput>
+  }
+
+  export type TaskFieldValueUpdateManyWithWhereWithoutTaskInput = {
+    where: TaskFieldValueScalarWhereInput
+    data: XOR<TaskFieldValueUpdateManyMutationInput, TaskFieldValueUncheckedUpdateManyWithoutTaskInput>
+  }
+
+  export type TaskFieldValueScalarWhereInput = {
+    AND?: TaskFieldValueScalarWhereInput | TaskFieldValueScalarWhereInput[]
+    OR?: TaskFieldValueScalarWhereInput[]
+    NOT?: TaskFieldValueScalarWhereInput | TaskFieldValueScalarWhereInput[]
+    id?: StringFilter<"TaskFieldValue"> | string
+    taskId?: StringFilter<"TaskFieldValue"> | string
+    fieldId?: StringFilter<"TaskFieldValue"> | string
+    value?: StringNullableFilter<"TaskFieldValue"> | string | null
+    createdAt?: DateTimeFilter<"TaskFieldValue"> | Date | string
+    updatedAt?: DateTimeFilter<"TaskFieldValue"> | Date | string
+  }
+
   export type TaskCreateWithoutRecurringTaskInput = {
     id?: string
     title: string
     description?: string | null
     status?: $Enums.TaskStatus
-    startDate?: Date | string | null
     dueDate?: Date | string | null
     completedAt?: Date | string | null
     npc?: string | null
@@ -17365,6 +20425,7 @@ export namespace Prisma {
     parent?: TaskCreateNestedOneWithoutChildrenInput
     children?: TaskCreateNestedManyWithoutParentInput
     category?: CategoryCreateNestedOneWithoutTasksInput
+    fieldValues?: TaskFieldValueCreateNestedManyWithoutTaskInput
   }
 
   export type TaskUncheckedCreateWithoutRecurringTaskInput = {
@@ -17374,7 +20435,6 @@ export namespace Prisma {
     status?: $Enums.TaskStatus
     categoryId?: string | null
     parentId?: string | null
-    startDate?: Date | string | null
     dueDate?: Date | string | null
     completedAt?: Date | string | null
     npc?: string | null
@@ -17387,6 +20447,7 @@ export namespace Prisma {
     reminders?: ReminderUncheckedCreateNestedManyWithoutTaskInput
     taskTags?: TaskTagUncheckedCreateNestedManyWithoutTaskInput
     children?: TaskUncheckedCreateNestedManyWithoutParentInput
+    fieldValues?: TaskFieldValueUncheckedCreateNestedManyWithoutTaskInput
   }
 
   export type TaskCreateOrConnectWithoutRecurringTaskInput = {
@@ -17410,7 +20471,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     npc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17425,6 +20485,7 @@ export namespace Prisma {
     parent?: TaskUpdateOneWithoutChildrenNestedInput
     children?: TaskUpdateManyWithoutParentNestedInput
     category?: CategoryUpdateOneWithoutTasksNestedInput
+    fieldValues?: TaskFieldValueUpdateManyWithoutTaskNestedInput
   }
 
   export type TaskUncheckedUpdateWithoutRecurringTaskInput = {
@@ -17434,7 +20495,6 @@ export namespace Prisma {
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     npc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17447,6 +20507,7 @@ export namespace Prisma {
     reminders?: ReminderUncheckedUpdateManyWithoutTaskNestedInput
     taskTags?: TaskTagUncheckedUpdateManyWithoutTaskNestedInput
     children?: TaskUncheckedUpdateManyWithoutParentNestedInput
+    fieldValues?: TaskFieldValueUncheckedUpdateManyWithoutTaskNestedInput
   }
 
   export type LedgerTaskCreateWithoutLedgerInput = {
@@ -17491,7 +20552,6 @@ export namespace Prisma {
     title: string
     description?: string | null
     status?: $Enums.TaskStatus
-    startDate?: Date | string | null
     dueDate?: Date | string | null
     completedAt?: Date | string | null
     npc?: string | null
@@ -17506,6 +20566,7 @@ export namespace Prisma {
     parent?: TaskCreateNestedOneWithoutChildrenInput
     children?: TaskCreateNestedManyWithoutParentInput
     category?: CategoryCreateNestedOneWithoutTasksInput
+    fieldValues?: TaskFieldValueCreateNestedManyWithoutTaskInput
   }
 
   export type TaskUncheckedCreateWithoutLedgerItemsInput = {
@@ -17515,7 +20576,6 @@ export namespace Prisma {
     status?: $Enums.TaskStatus
     categoryId?: string | null
     parentId?: string | null
-    startDate?: Date | string | null
     dueDate?: Date | string | null
     completedAt?: Date | string | null
     npc?: string | null
@@ -17528,6 +20588,7 @@ export namespace Prisma {
     reminders?: ReminderUncheckedCreateNestedManyWithoutTaskInput
     taskTags?: TaskTagUncheckedCreateNestedManyWithoutTaskInput
     children?: TaskUncheckedCreateNestedManyWithoutParentInput
+    fieldValues?: TaskFieldValueUncheckedCreateNestedManyWithoutTaskInput
   }
 
   export type TaskCreateOrConnectWithoutLedgerItemsInput = {
@@ -17578,7 +20639,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     npc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17593,6 +20653,7 @@ export namespace Prisma {
     parent?: TaskUpdateOneWithoutChildrenNestedInput
     children?: TaskUpdateManyWithoutParentNestedInput
     category?: CategoryUpdateOneWithoutTasksNestedInput
+    fieldValues?: TaskFieldValueUpdateManyWithoutTaskNestedInput
   }
 
   export type TaskUncheckedUpdateWithoutLedgerItemsInput = {
@@ -17602,7 +20663,6 @@ export namespace Prisma {
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     npc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17615,6 +20675,7 @@ export namespace Prisma {
     reminders?: ReminderUncheckedUpdateManyWithoutTaskNestedInput
     taskTags?: TaskTagUncheckedUpdateManyWithoutTaskNestedInput
     children?: TaskUncheckedUpdateManyWithoutParentNestedInput
+    fieldValues?: TaskFieldValueUncheckedUpdateManyWithoutTaskNestedInput
   }
 
   export type LedgerUpsertWithoutTasksInput = {
@@ -17655,7 +20716,6 @@ export namespace Prisma {
     title: string
     description?: string | null
     status?: $Enums.TaskStatus
-    startDate?: Date | string | null
     dueDate?: Date | string | null
     completedAt?: Date | string | null
     npc?: string | null
@@ -17670,6 +20730,7 @@ export namespace Prisma {
     parent?: TaskCreateNestedOneWithoutChildrenInput
     children?: TaskCreateNestedManyWithoutParentInput
     category?: CategoryCreateNestedOneWithoutTasksInput
+    fieldValues?: TaskFieldValueCreateNestedManyWithoutTaskInput
   }
 
   export type TaskUncheckedCreateWithoutRemindersInput = {
@@ -17679,7 +20740,6 @@ export namespace Prisma {
     status?: $Enums.TaskStatus
     categoryId?: string | null
     parentId?: string | null
-    startDate?: Date | string | null
     dueDate?: Date | string | null
     completedAt?: Date | string | null
     npc?: string | null
@@ -17692,6 +20752,7 @@ export namespace Prisma {
     recurringTask?: RecurringTaskUncheckedCreateNestedOneWithoutTaskInput
     taskTags?: TaskTagUncheckedCreateNestedManyWithoutTaskInput
     children?: TaskUncheckedCreateNestedManyWithoutParentInput
+    fieldValues?: TaskFieldValueUncheckedCreateNestedManyWithoutTaskInput
   }
 
   export type TaskCreateOrConnectWithoutRemindersInput = {
@@ -17715,7 +20776,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     npc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17730,6 +20790,7 @@ export namespace Prisma {
     parent?: TaskUpdateOneWithoutChildrenNestedInput
     children?: TaskUpdateManyWithoutParentNestedInput
     category?: CategoryUpdateOneWithoutTasksNestedInput
+    fieldValues?: TaskFieldValueUpdateManyWithoutTaskNestedInput
   }
 
   export type TaskUncheckedUpdateWithoutRemindersInput = {
@@ -17739,7 +20800,6 @@ export namespace Prisma {
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     npc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17752,6 +20812,212 @@ export namespace Prisma {
     recurringTask?: RecurringTaskUncheckedUpdateOneWithoutTaskNestedInput
     taskTags?: TaskTagUncheckedUpdateManyWithoutTaskNestedInput
     children?: TaskUncheckedUpdateManyWithoutParentNestedInput
+    fieldValues?: TaskFieldValueUncheckedUpdateManyWithoutTaskNestedInput
+  }
+
+  export type TaskFieldValueCreateWithoutFieldInput = {
+    id?: string
+    value?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    task: TaskCreateNestedOneWithoutFieldValuesInput
+  }
+
+  export type TaskFieldValueUncheckedCreateWithoutFieldInput = {
+    id?: string
+    taskId: string
+    value?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TaskFieldValueCreateOrConnectWithoutFieldInput = {
+    where: TaskFieldValueWhereUniqueInput
+    create: XOR<TaskFieldValueCreateWithoutFieldInput, TaskFieldValueUncheckedCreateWithoutFieldInput>
+  }
+
+  export type TaskFieldValueCreateManyFieldInputEnvelope = {
+    data: TaskFieldValueCreateManyFieldInput | TaskFieldValueCreateManyFieldInput[]
+  }
+
+  export type TaskFieldValueUpsertWithWhereUniqueWithoutFieldInput = {
+    where: TaskFieldValueWhereUniqueInput
+    update: XOR<TaskFieldValueUpdateWithoutFieldInput, TaskFieldValueUncheckedUpdateWithoutFieldInput>
+    create: XOR<TaskFieldValueCreateWithoutFieldInput, TaskFieldValueUncheckedCreateWithoutFieldInput>
+  }
+
+  export type TaskFieldValueUpdateWithWhereUniqueWithoutFieldInput = {
+    where: TaskFieldValueWhereUniqueInput
+    data: XOR<TaskFieldValueUpdateWithoutFieldInput, TaskFieldValueUncheckedUpdateWithoutFieldInput>
+  }
+
+  export type TaskFieldValueUpdateManyWithWhereWithoutFieldInput = {
+    where: TaskFieldValueScalarWhereInput
+    data: XOR<TaskFieldValueUpdateManyMutationInput, TaskFieldValueUncheckedUpdateManyWithoutFieldInput>
+  }
+
+  export type TaskCreateWithoutFieldValuesInput = {
+    id?: string
+    title: string
+    description?: string | null
+    status?: $Enums.TaskStatus
+    dueDate?: Date | string | null
+    completedAt?: Date | string | null
+    npc?: string | null
+    notes?: string | null
+    towerLink?: string | null
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ledgerItems?: LedgerTaskCreateNestedManyWithoutTaskInput
+    recurringTask?: RecurringTaskCreateNestedOneWithoutTaskInput
+    reminders?: ReminderCreateNestedManyWithoutTaskInput
+    taskTags?: TaskTagCreateNestedManyWithoutTaskInput
+    parent?: TaskCreateNestedOneWithoutChildrenInput
+    children?: TaskCreateNestedManyWithoutParentInput
+    category?: CategoryCreateNestedOneWithoutTasksInput
+  }
+
+  export type TaskUncheckedCreateWithoutFieldValuesInput = {
+    id?: string
+    title: string
+    description?: string | null
+    status?: $Enums.TaskStatus
+    categoryId?: string | null
+    parentId?: string | null
+    dueDate?: Date | string | null
+    completedAt?: Date | string | null
+    npc?: string | null
+    notes?: string | null
+    towerLink?: string | null
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ledgerItems?: LedgerTaskUncheckedCreateNestedManyWithoutTaskInput
+    recurringTask?: RecurringTaskUncheckedCreateNestedOneWithoutTaskInput
+    reminders?: ReminderUncheckedCreateNestedManyWithoutTaskInput
+    taskTags?: TaskTagUncheckedCreateNestedManyWithoutTaskInput
+    children?: TaskUncheckedCreateNestedManyWithoutParentInput
+  }
+
+  export type TaskCreateOrConnectWithoutFieldValuesInput = {
+    where: TaskWhereUniqueInput
+    create: XOR<TaskCreateWithoutFieldValuesInput, TaskUncheckedCreateWithoutFieldValuesInput>
+  }
+
+  export type CustomFieldCreateWithoutValuesInput = {
+    id?: string
+    name: string
+    key: string
+    type: $Enums.CustomFieldType
+    options?: string | null
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CustomFieldUncheckedCreateWithoutValuesInput = {
+    id?: string
+    name: string
+    key: string
+    type: $Enums.CustomFieldType
+    options?: string | null
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CustomFieldCreateOrConnectWithoutValuesInput = {
+    where: CustomFieldWhereUniqueInput
+    create: XOR<CustomFieldCreateWithoutValuesInput, CustomFieldUncheckedCreateWithoutValuesInput>
+  }
+
+  export type TaskUpsertWithoutFieldValuesInput = {
+    update: XOR<TaskUpdateWithoutFieldValuesInput, TaskUncheckedUpdateWithoutFieldValuesInput>
+    create: XOR<TaskCreateWithoutFieldValuesInput, TaskUncheckedCreateWithoutFieldValuesInput>
+    where?: TaskWhereInput
+  }
+
+  export type TaskUpdateToOneWithWhereWithoutFieldValuesInput = {
+    where?: TaskWhereInput
+    data: XOR<TaskUpdateWithoutFieldValuesInput, TaskUncheckedUpdateWithoutFieldValuesInput>
+  }
+
+  export type TaskUpdateWithoutFieldValuesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    npc?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    towerLink?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ledgerItems?: LedgerTaskUpdateManyWithoutTaskNestedInput
+    recurringTask?: RecurringTaskUpdateOneWithoutTaskNestedInput
+    reminders?: ReminderUpdateManyWithoutTaskNestedInput
+    taskTags?: TaskTagUpdateManyWithoutTaskNestedInput
+    parent?: TaskUpdateOneWithoutChildrenNestedInput
+    children?: TaskUpdateManyWithoutParentNestedInput
+    category?: CategoryUpdateOneWithoutTasksNestedInput
+  }
+
+  export type TaskUncheckedUpdateWithoutFieldValuesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    npc?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    towerLink?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ledgerItems?: LedgerTaskUncheckedUpdateManyWithoutTaskNestedInput
+    recurringTask?: RecurringTaskUncheckedUpdateOneWithoutTaskNestedInput
+    reminders?: ReminderUncheckedUpdateManyWithoutTaskNestedInput
+    taskTags?: TaskTagUncheckedUpdateManyWithoutTaskNestedInput
+    children?: TaskUncheckedUpdateManyWithoutParentNestedInput
+  }
+
+  export type CustomFieldUpsertWithoutValuesInput = {
+    update: XOR<CustomFieldUpdateWithoutValuesInput, CustomFieldUncheckedUpdateWithoutValuesInput>
+    create: XOR<CustomFieldCreateWithoutValuesInput, CustomFieldUncheckedCreateWithoutValuesInput>
+    where?: CustomFieldWhereInput
+  }
+
+  export type CustomFieldUpdateToOneWithWhereWithoutValuesInput = {
+    where?: CustomFieldWhereInput
+    data: XOR<CustomFieldUpdateWithoutValuesInput, CustomFieldUncheckedUpdateWithoutValuesInput>
+  }
+
+  export type CustomFieldUpdateWithoutValuesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    type?: EnumCustomFieldTypeFieldUpdateOperationsInput | $Enums.CustomFieldType
+    options?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomFieldUncheckedUpdateWithoutValuesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    type?: EnumCustomFieldTypeFieldUpdateOperationsInput | $Enums.CustomFieldType
+    options?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CategoryCreateManyParentInput = {
@@ -17773,7 +21039,6 @@ export namespace Prisma {
     description?: string | null
     status?: $Enums.TaskStatus
     parentId?: string | null
-    startDate?: Date | string | null
     dueDate?: Date | string | null
     completedAt?: Date | string | null
     npc?: string | null
@@ -17832,7 +21097,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     npc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17847,6 +21111,7 @@ export namespace Prisma {
     taskTags?: TaskTagUpdateManyWithoutTaskNestedInput
     parent?: TaskUpdateOneWithoutChildrenNestedInput
     children?: TaskUpdateManyWithoutParentNestedInput
+    fieldValues?: TaskFieldValueUpdateManyWithoutTaskNestedInput
   }
 
   export type TaskUncheckedUpdateWithoutCategoryInput = {
@@ -17855,7 +21120,6 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     npc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17869,6 +21133,7 @@ export namespace Prisma {
     reminders?: ReminderUncheckedUpdateManyWithoutTaskNestedInput
     taskTags?: TaskTagUncheckedUpdateManyWithoutTaskNestedInput
     children?: TaskUncheckedUpdateManyWithoutParentNestedInput
+    fieldValues?: TaskFieldValueUncheckedUpdateManyWithoutTaskNestedInput
   }
 
   export type TaskUncheckedUpdateManyWithoutCategoryInput = {
@@ -17877,7 +21142,6 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     npc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17939,13 +21203,20 @@ export namespace Prisma {
     description?: string | null
     status?: $Enums.TaskStatus
     categoryId?: string | null
-    startDate?: Date | string | null
     dueDate?: Date | string | null
     completedAt?: Date | string | null
     npc?: string | null
     notes?: string | null
     towerLink?: string | null
     sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TaskFieldValueCreateManyTaskInput = {
+    id?: string
+    fieldId: string
+    value?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -18018,7 +21289,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     npc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18033,6 +21303,7 @@ export namespace Prisma {
     taskTags?: TaskTagUpdateManyWithoutTaskNestedInput
     children?: TaskUpdateManyWithoutParentNestedInput
     category?: CategoryUpdateOneWithoutTasksNestedInput
+    fieldValues?: TaskFieldValueUpdateManyWithoutTaskNestedInput
   }
 
   export type TaskUncheckedUpdateWithoutParentInput = {
@@ -18041,7 +21312,6 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     npc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18055,6 +21325,7 @@ export namespace Prisma {
     reminders?: ReminderUncheckedUpdateManyWithoutTaskNestedInput
     taskTags?: TaskTagUncheckedUpdateManyWithoutTaskNestedInput
     children?: TaskUncheckedUpdateManyWithoutParentNestedInput
+    fieldValues?: TaskFieldValueUncheckedUpdateManyWithoutTaskNestedInput
   }
 
   export type TaskUncheckedUpdateManyWithoutParentInput = {
@@ -18063,13 +21334,36 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     npc?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     towerLink?: NullableStringFieldUpdateOperationsInput | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TaskFieldValueUpdateWithoutTaskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    field?: CustomFieldUpdateOneRequiredWithoutValuesNestedInput
+  }
+
+  export type TaskFieldValueUncheckedUpdateWithoutTaskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fieldId?: StringFieldUpdateOperationsInput | string
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TaskFieldValueUncheckedUpdateManyWithoutTaskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fieldId?: StringFieldUpdateOperationsInput | string
+    value?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -18096,6 +21390,38 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     taskId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TaskFieldValueCreateManyFieldInput = {
+    id?: string
+    taskId: string
+    value?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TaskFieldValueUpdateWithoutFieldInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    task?: TaskUpdateOneRequiredWithoutFieldValuesNestedInput
+  }
+
+  export type TaskFieldValueUncheckedUpdateWithoutFieldInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    taskId?: StringFieldUpdateOperationsInput | string
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TaskFieldValueUncheckedUpdateManyWithoutFieldInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    taskId?: StringFieldUpdateOperationsInput | string
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

@@ -9,7 +9,7 @@ async function getCalendarData(year: number, month: number) {
 
   const tasks = await prisma.task.findMany({
     where: {
-      OR: [{ dueDate: { gte: startDate, lte: endDate } }, { startDate: { gte: startDate, lte: endDate } }],
+      OR: [{ dueDate: { gte: startDate, lte: endDate } }],
     },
     orderBy: { dueDate: "asc" },
     include: { category: true },
@@ -34,8 +34,6 @@ export default async function CalendarPage({
   for (const task of tasks) {
     const dateKey = task.dueDate
       ? new Date(task.dueDate).toDateString()
-      : task.startDate
-      ? new Date(task.startDate).toDateString()
       : null;
     if (dateKey) {
       if (!tasksByDate.has(dateKey)) tasksByDate.set(dateKey, []);

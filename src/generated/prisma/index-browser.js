@@ -153,7 +153,6 @@ exports.Prisma.TaskScalarFieldEnum = {
   status: 'status',
   categoryId: 'categoryId',
   parentId: 'parentId',
-  startDate: 'startDate',
   dueDate: 'dueDate',
   completedAt: 'completedAt',
   npc: 'npc',
@@ -227,6 +226,26 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.CustomFieldScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  key: 'key',
+  type: 'type',
+  options: 'options',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TaskFieldValueScalarFieldEnum = {
+  id: 'id',
+  taskId: 'taskId',
+  fieldId: 'fieldId',
+  value: 'value',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -276,6 +295,13 @@ exports.ReminderTiming = exports.$Enums.ReminderTiming = {
   BEFORE_30_DAYS: 'BEFORE_30_DAYS'
 };
 
+exports.CustomFieldType = exports.$Enums.CustomFieldType = {
+  TEXT: 'TEXT',
+  DATE: 'DATE',
+  SELECT: 'SELECT',
+  NUMBER: 'NUMBER'
+};
+
 exports.Prisma.ModelName = {
   Category: 'Category',
   Tag: 'Tag',
@@ -286,7 +312,9 @@ exports.Prisma.ModelName = {
   LedgerTask: 'LedgerTask',
   Reminder: 'Reminder',
   Setting: 'Setting',
-  User: 'User'
+  User: 'User',
+  CustomField: 'CustomField',
+  TaskFieldValue: 'TaskFieldValue'
 };
 
 /**

@@ -1,17 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "家庭精益化管理系统",
@@ -24,8 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN" className={`${geistSans.variable} ${geistMono.variable} h-full`}>
-      <body className="h-full flex antialiased bg-gray-50 text-gray-900">
+    <html lang="zh-CN" className="h-full">
+      <body className="h-full flex antialiased bg-gray-50 text-gray-900 font-sans">
         <Sidebar />
         <main className="flex-1 overflow-auto">
           {children}

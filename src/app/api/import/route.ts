@@ -184,7 +184,6 @@ export async function POST(request: NextRequest) {
             description: row["任务描述"] ? String(row["任务描述"]) : null,
             status,
             categoryId,
-            startDate: parseDate(row["开始日期"]),
             dueDate: parseDate(row["截止日期"]),
             completedAt: isCompleted ? parseDate(row["完成时间"]) || new Date() : null,
             npc: row["NPC"] ? String(row["NPC"]) : null,

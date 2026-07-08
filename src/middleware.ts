@@ -10,7 +10,6 @@ export function middleware(request: NextRequest) {
   // 公开路径（不需要鉴权）—— 不含 basePath 前缀
   const publicPaths = [
     '/login',
-    '/register',
     '/api/auth/',
     '/_next/',
     '/favicon.ico',

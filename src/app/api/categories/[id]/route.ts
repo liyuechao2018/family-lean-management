@@ -55,9 +55,10 @@ export async function DELETE(
       });
     }
 
-    // 删除子分类（如果有）
-    await prisma.category.deleteMany({
+    // 将子分类提升为一级分类（parentId 设为 null），避免级联误删
+    await prisma.category.updateMany({
       where: { parentId: id },
+      data: { parentId: null },
     });
 
     // 删除分类本身

@@ -57,28 +57,28 @@ model TaskTag {
 
 /// 事项管理 - 核心任务模型
 model Task {
-  id            String         @id @default(cuid())
+  id            String           @id @default(cuid())
   title         String
   description   String?
-  status        TaskStatus     @default(TODO)
+  status        TaskStatus       @default(TODO)
   categoryId    String?
   parentId      String?
-  startDate     DateTime?
   dueDate       DateTime?
   completedAt   DateTime?
   npc           String?
   notes         String?
   towerLink     String?
-  sortOrder     Int            @default(0)
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  sortOrder     Int              @default(0)
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
   ledgerItems   LedgerTask[]
   recurringTask RecurringTask?
   reminders     Reminder[]
   taskTags      TaskTag[]
-  parent        Task?          @relation("TaskHierarchy", fields: [parentId], references: [id])
-  children      Task[]         @relation("TaskHierarchy")
-  category      Category?      @relation(fields: [categoryId], references: [id])
+  parent        Task?            @relation("TaskHierarchy", fields: [parentId], references: [id])
+  children      Task[]           @relation("TaskHierarchy")
+  category      Category?        @relation(fields: [categoryId], references: [id])
+  fieldValues   TaskFieldValue[]
 
   @@index([status])
   @@index([dueDate])
@@ -218,4 +218,43 @@ enum ReminderTiming {
   BEFORE_3_DAYS
   BEFORE_7_DAYS
   BEFORE_30_DAYS
+}
+
+/// 自定义字段定义
+model CustomField {
+  id        String           @id @default(cuid())
+  name      String
+  key       String           @unique
+  type      CustomFieldType
+  options   String? // JSON 数组，用于 SELECT 类型
+  sortOrder Int              @default(0)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  values    TaskFieldValue[]
+
+  @@map("custom_fields")
+}
+
+/// 任务自定义字段值
+model TaskFieldValue {
+  id        String      @id @default(cuid())
+  taskId    String
+  fieldId   String
+  value     String? // 统一存储为字符串，按类型转换
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  task      Task        @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  field     CustomField @relation(fields: [fieldId], references: [id], onDelete: Cascade)
+
+  @@unique([taskId, fieldId])
+  @@index([fieldId])
+  @@index([taskId])
+  @@map("task_field_values")
+}
+
+enum CustomFieldType {
+  TEXT
+  DATE
+  SELECT
+  NUMBER
 }

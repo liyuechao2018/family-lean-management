@@ -21,7 +21,7 @@ export default function TaskActions({
       data.completedAt = new Date().toISOString();
     }
 
-    await fetch(`/api/tasks/${taskId}`, {
+    await fetch(`/lean-management/api/tasks/${taskId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -30,7 +30,7 @@ export default function TaskActions({
   }
 
   async function deleteTask() {
-    const res = await fetch(`/api/tasks/${taskId}`, { method: "DELETE" });
+    const res = await fetch(`/lean-management/api/tasks/${taskId}`, { method: "DELETE" });
     if (res.ok) {
       router.push("/tasks");
     }

@@ -28,7 +28,7 @@ export default function ImportPage() {
     formData.append("file", file);
 
     try {
-      const res = await fetch("/api/import", {
+      const res = await fetch("/lean-management/api/import", {
         method: "POST",
         body: formData,
       });
@@ -55,7 +55,7 @@ export default function ImportPage() {
         <p className="text-sm text-gray-600 mb-4">
           请上传从 Tower 导出的 Excel 文件（.xlsx）。
           <br />
-          支持的字段：类型、任务标题、任务描述、父任务、是否完成、所属清单、开始日期、截止日期、NPC、完成时间、备注、链接地址。
+          支持的字段：类型、任务标题、任务描述、父任务、是否完成、所属清单、截止日期、NPC、完成时间、备注、链接地址。
         </p>
 
         <form onSubmit={handleUpload} className="space-y-4">

@@ -92,10 +92,6 @@ export default async function TaskDetailPage({
           <InfoRow label="分类" value={task.category?.name || "未分类"} />
           <InfoRow label="NPC / 处理入口" value={task.npc || "—"} />
           <InfoRow
-            label="开始日期"
-            value={formatDate(task.startDate)}
-          />
-          <InfoRow
             label="截止日期"
             value={formatDate(task.dueDate)}
             highlight={!!isOverdue}

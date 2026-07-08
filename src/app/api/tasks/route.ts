@@ -36,7 +36,6 @@ export async function POST(request: NextRequest) {
         status: (body.status as TaskStatus) || "TODO",
         categoryId: body.categoryId || null,
         parentId: body.parentId || null,
-        startDate: body.startDate ? new Date(body.startDate) : null,
         dueDate: body.dueDate ? new Date(body.dueDate) : null,
         npc: body.npc || null,
         notes: body.notes || null,

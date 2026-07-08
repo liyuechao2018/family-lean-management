@@ -123,7 +123,6 @@ async function main() {
       title,
       description: row['任务描述'] || null,
       status: 'TODO',
-      startDate: parseDate(row['开始日期']),
       dueDate: parseDate(row['截止日期']),
       npc: row['NPC'] || null,
       notes: row['备注'] || null,
