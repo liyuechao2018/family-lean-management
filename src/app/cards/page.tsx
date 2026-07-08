@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 
 async function getStandaloneCategories() {
   const categories = await prisma.category.findMany({
-    where: { viewKey: "members" },
+    where: { viewKey: "cards" },
     orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
     include: {
       _count: { select: { tasks: true } },
@@ -53,7 +53,7 @@ async function getSettings() {
   return Object.fromEntries(settings.map((s) => [s.key, s.value]));
 }
 
-export default async function MembersPage() {
+export default async function CardsPage() {
   const [categories, customFields, settings] = await Promise.all([
     getStandaloneCategories(),
     getCustomFields(),
@@ -63,9 +63,9 @@ export default async function MembersPage() {
   return (
     <div className="space-y-4">
       <div>
-        <h1 className="text-2xl font-bold text-gray-800">会员管理</h1>
+        <h1 className="text-2xl font-bold text-gray-800">充值卡余额</h1>
         <p className="text-sm text-gray-500 mt-1">
-          家庭层面的会员、订阅与权益管理
+          家庭层面的充值卡、储值卡与余额管理
         </p>
       </div>
       <CategoryBoard
