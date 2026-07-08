@@ -2177,6 +2177,7 @@ export namespace Prisma {
     topLevel: string | null
     sortOrder: number | null
     collapsed: boolean | null
+    standalone: boolean | null
     color: string | null
     icon: string | null
     createdAt: Date | null
@@ -2191,6 +2192,7 @@ export namespace Prisma {
     topLevel: string | null
     sortOrder: number | null
     collapsed: boolean | null
+    standalone: boolean | null
     color: string | null
     icon: string | null
     createdAt: Date | null
@@ -2205,6 +2207,7 @@ export namespace Prisma {
     topLevel: number
     sortOrder: number
     collapsed: number
+    standalone: number
     color: number
     icon: number
     createdAt: number
@@ -2231,6 +2234,7 @@ export namespace Prisma {
     topLevel?: true
     sortOrder?: true
     collapsed?: true
+    standalone?: true
     color?: true
     icon?: true
     createdAt?: true
@@ -2245,6 +2249,7 @@ export namespace Prisma {
     topLevel?: true
     sortOrder?: true
     collapsed?: true
+    standalone?: true
     color?: true
     icon?: true
     createdAt?: true
@@ -2259,6 +2264,7 @@ export namespace Prisma {
     topLevel?: true
     sortOrder?: true
     collapsed?: true
+    standalone?: true
     color?: true
     icon?: true
     createdAt?: true
@@ -2360,6 +2366,7 @@ export namespace Prisma {
     topLevel: string
     sortOrder: number
     collapsed: boolean
+    standalone: boolean
     color: string | null
     icon: string | null
     createdAt: Date
@@ -2393,6 +2400,7 @@ export namespace Prisma {
     topLevel?: boolean
     sortOrder?: boolean
     collapsed?: boolean
+    standalone?: boolean
     color?: boolean
     icon?: boolean
     createdAt?: boolean
@@ -2411,6 +2419,7 @@ export namespace Prisma {
     topLevel?: boolean
     sortOrder?: boolean
     collapsed?: boolean
+    standalone?: boolean
     color?: boolean
     icon?: boolean
     createdAt?: boolean
@@ -2426,6 +2435,7 @@ export namespace Prisma {
     topLevel?: boolean
     sortOrder?: boolean
     collapsed?: boolean
+    standalone?: boolean
     color?: boolean
     icon?: boolean
     createdAt?: boolean
@@ -2441,6 +2451,7 @@ export namespace Prisma {
     topLevel?: boolean
     sortOrder?: boolean
     collapsed?: boolean
+    standalone?: boolean
     color?: boolean
     icon?: boolean
     createdAt?: boolean
@@ -2448,7 +2459,7 @@ export namespace Prisma {
     parentId?: boolean
   }
 
-  export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "level" | "topLevel" | "sortOrder" | "collapsed" | "color" | "icon" | "createdAt" | "updatedAt" | "parentId", ExtArgs["result"]["category"]>
+  export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "level" | "topLevel" | "sortOrder" | "collapsed" | "standalone" | "color" | "icon" | "createdAt" | "updatedAt" | "parentId", ExtArgs["result"]["category"]>
   export type CategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     parent?: boolean | Category$parentArgs<ExtArgs>
     children?: boolean | Category$childrenArgs<ExtArgs>
@@ -2476,6 +2487,7 @@ export namespace Prisma {
       topLevel: string
       sortOrder: number
       collapsed: boolean
+      standalone: boolean
       color: string | null
       icon: string | null
       createdAt: Date
@@ -2913,6 +2925,7 @@ export namespace Prisma {
     readonly topLevel: FieldRef<"Category", 'String'>
     readonly sortOrder: FieldRef<"Category", 'Int'>
     readonly collapsed: FieldRef<"Category", 'Boolean'>
+    readonly standalone: FieldRef<"Category", 'Boolean'>
     readonly color: FieldRef<"Category", 'String'>
     readonly icon: FieldRef<"Category", 'String'>
     readonly createdAt: FieldRef<"Category", 'DateTime'>
@@ -15640,6 +15653,7 @@ export namespace Prisma {
     topLevel: 'topLevel',
     sortOrder: 'sortOrder',
     collapsed: 'collapsed',
+    standalone: 'standalone',
     color: 'color',
     icon: 'icon',
     createdAt: 'createdAt',
@@ -15901,6 +15915,7 @@ export namespace Prisma {
     topLevel?: StringFilter<"Category"> | string
     sortOrder?: IntFilter<"Category"> | number
     collapsed?: BoolFilter<"Category"> | boolean
+    standalone?: BoolFilter<"Category"> | boolean
     color?: StringNullableFilter<"Category"> | string | null
     icon?: StringNullableFilter<"Category"> | string | null
     createdAt?: DateTimeFilter<"Category"> | Date | string
@@ -15918,6 +15933,7 @@ export namespace Prisma {
     topLevel?: SortOrder
     sortOrder?: SortOrder
     collapsed?: SortOrder
+    standalone?: SortOrder
     color?: SortOrderInput | SortOrder
     icon?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -15938,6 +15954,7 @@ export namespace Prisma {
     topLevel?: StringFilter<"Category"> | string
     sortOrder?: IntFilter<"Category"> | number
     collapsed?: BoolFilter<"Category"> | boolean
+    standalone?: BoolFilter<"Category"> | boolean
     color?: StringNullableFilter<"Category"> | string | null
     icon?: StringNullableFilter<"Category"> | string | null
     createdAt?: DateTimeFilter<"Category"> | Date | string
@@ -15955,6 +15972,7 @@ export namespace Prisma {
     topLevel?: SortOrder
     sortOrder?: SortOrder
     collapsed?: SortOrder
+    standalone?: SortOrder
     color?: SortOrderInput | SortOrder
     icon?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -15977,6 +15995,7 @@ export namespace Prisma {
     topLevel?: StringWithAggregatesFilter<"Category"> | string
     sortOrder?: IntWithAggregatesFilter<"Category"> | number
     collapsed?: BoolWithAggregatesFilter<"Category"> | boolean
+    standalone?: BoolWithAggregatesFilter<"Category"> | boolean
     color?: StringNullableWithAggregatesFilter<"Category"> | string | null
     icon?: StringNullableWithAggregatesFilter<"Category"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
@@ -16759,6 +16778,7 @@ export namespace Prisma {
     topLevel: string
     sortOrder?: number
     collapsed?: boolean
+    standalone?: boolean
     color?: string | null
     icon?: string | null
     createdAt?: Date | string
@@ -16775,6 +16795,7 @@ export namespace Prisma {
     topLevel: string
     sortOrder?: number
     collapsed?: boolean
+    standalone?: boolean
     color?: string | null
     icon?: string | null
     createdAt?: Date | string
@@ -16791,6 +16812,7 @@ export namespace Prisma {
     topLevel?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
     collapsed?: BoolFieldUpdateOperationsInput | boolean
+    standalone?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16807,6 +16829,7 @@ export namespace Prisma {
     topLevel?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
     collapsed?: BoolFieldUpdateOperationsInput | boolean
+    standalone?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16823,6 +16846,7 @@ export namespace Prisma {
     topLevel: string
     sortOrder?: number
     collapsed?: boolean
+    standalone?: boolean
     color?: string | null
     icon?: string | null
     createdAt?: Date | string
@@ -16837,6 +16861,7 @@ export namespace Prisma {
     topLevel?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
     collapsed?: BoolFieldUpdateOperationsInput | boolean
+    standalone?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16850,6 +16875,7 @@ export namespace Prisma {
     topLevel?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
     collapsed?: BoolFieldUpdateOperationsInput | boolean
+    standalone?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17773,6 +17799,7 @@ export namespace Prisma {
     topLevel?: SortOrder
     sortOrder?: SortOrder
     collapsed?: SortOrder
+    standalone?: SortOrder
     color?: SortOrder
     icon?: SortOrder
     createdAt?: SortOrder
@@ -17792,6 +17819,7 @@ export namespace Prisma {
     topLevel?: SortOrder
     sortOrder?: SortOrder
     collapsed?: SortOrder
+    standalone?: SortOrder
     color?: SortOrder
     icon?: SortOrder
     createdAt?: SortOrder
@@ -17806,6 +17834,7 @@ export namespace Prisma {
     topLevel?: SortOrder
     sortOrder?: SortOrder
     collapsed?: SortOrder
+    standalone?: SortOrder
     color?: SortOrder
     icon?: SortOrder
     createdAt?: SortOrder
@@ -19451,6 +19480,7 @@ export namespace Prisma {
     topLevel: string
     sortOrder?: number
     collapsed?: boolean
+    standalone?: boolean
     color?: string | null
     icon?: string | null
     createdAt?: Date | string
@@ -19466,6 +19496,7 @@ export namespace Prisma {
     topLevel: string
     sortOrder?: number
     collapsed?: boolean
+    standalone?: boolean
     color?: string | null
     icon?: string | null
     createdAt?: Date | string
@@ -19486,6 +19517,7 @@ export namespace Prisma {
     topLevel: string
     sortOrder?: number
     collapsed?: boolean
+    standalone?: boolean
     color?: string | null
     icon?: string | null
     createdAt?: Date | string
@@ -19501,6 +19533,7 @@ export namespace Prisma {
     topLevel: string
     sortOrder?: number
     collapsed?: boolean
+    standalone?: boolean
     color?: string | null
     icon?: string | null
     createdAt?: Date | string
@@ -19589,6 +19622,7 @@ export namespace Prisma {
     topLevel?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
     collapsed?: BoolFieldUpdateOperationsInput | boolean
+    standalone?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19604,6 +19638,7 @@ export namespace Prisma {
     topLevel?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
     collapsed?: BoolFieldUpdateOperationsInput | boolean
+    standalone?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19638,6 +19673,7 @@ export namespace Prisma {
     topLevel?: StringFilter<"Category"> | string
     sortOrder?: IntFilter<"Category"> | number
     collapsed?: BoolFilter<"Category"> | boolean
+    standalone?: BoolFilter<"Category"> | boolean
     color?: StringNullableFilter<"Category"> | string | null
     icon?: StringNullableFilter<"Category"> | string | null
     createdAt?: DateTimeFilter<"Category"> | Date | string
@@ -20095,6 +20131,7 @@ export namespace Prisma {
     topLevel: string
     sortOrder?: number
     collapsed?: boolean
+    standalone?: boolean
     color?: string | null
     icon?: string | null
     createdAt?: Date | string
@@ -20110,6 +20147,7 @@ export namespace Prisma {
     topLevel: string
     sortOrder?: number
     collapsed?: boolean
+    standalone?: boolean
     color?: string | null
     icon?: string | null
     createdAt?: Date | string
@@ -20355,6 +20393,7 @@ export namespace Prisma {
     topLevel?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
     collapsed?: BoolFieldUpdateOperationsInput | boolean
+    standalone?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20370,6 +20409,7 @@ export namespace Prisma {
     topLevel?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
     collapsed?: BoolFieldUpdateOperationsInput | boolean
+    standalone?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21027,6 +21067,7 @@ export namespace Prisma {
     topLevel: string
     sortOrder?: number
     collapsed?: boolean
+    standalone?: boolean
     color?: string | null
     icon?: string | null
     createdAt?: Date | string
@@ -21056,6 +21097,7 @@ export namespace Prisma {
     topLevel?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
     collapsed?: BoolFieldUpdateOperationsInput | boolean
+    standalone?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21071,6 +21113,7 @@ export namespace Prisma {
     topLevel?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
     collapsed?: BoolFieldUpdateOperationsInput | boolean
+    standalone?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21086,6 +21129,7 @@ export namespace Prisma {
     topLevel?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
     collapsed?: BoolFieldUpdateOperationsInput | boolean
+    standalone?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

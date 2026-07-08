@@ -125,6 +125,7 @@ exports.Prisma.CategoryScalarFieldEnum = {
   topLevel: 'topLevel',
   sortOrder: 'sortOrder',
   collapsed: 'collapsed',
+  standalone: 'standalone',
   color: 'color',
   icon: 'icon',
   createdAt: 'createdAt',

@@ -10,23 +10,25 @@ datasource db {
 
 /// 分类管理 - 支持一级和二级分类
 model Category {
-  id        String     @id @default(cuid())
-  name      String
-  level     Int        @default(1)
-  topLevel  String
-  sortOrder Int        @default(0)
-  collapsed Boolean    @default(false)
-  color     String?
-  icon      String?
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  parentId  String?
-  parent    Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
-  children  Category[] @relation("CategoryHierarchy")
-  tasks     Task[]
+  id         String     @id @default(cuid())
+  name       String
+  level      Int        @default(1)
+  topLevel   String
+  sortOrder  Int        @default(0)
+  collapsed  Boolean    @default(false)
+  standalone Boolean    @default(false) // 是否拥有独立视图（如会员管理）
+  color      String?
+  icon       String?
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  parentId   String?
+  parent     Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children   Category[] @relation("CategoryHierarchy")
+  tasks      Task[]
 
   @@index([topLevel])
   @@index([parentId])
+  @@index([standalone])
   @@map("categories")
 }
 

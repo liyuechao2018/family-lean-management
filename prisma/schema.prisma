@@ -16,6 +16,7 @@ model Category {
   topLevel  String
   sortOrder Int        @default(0)
   collapsed Boolean    @default(false)
+  standalone Boolean    @default(false)  // 是否拥有独立视图（如会员管理）
   color     String?
   icon      String?
   createdAt DateTime   @default(now())
@@ -27,6 +28,7 @@ model Category {
 
   @@index([topLevel])
   @@index([parentId])
+  @@index([standalone])
   @@map("categories")
 }
 

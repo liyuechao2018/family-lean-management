@@ -9,6 +9,7 @@ const navItems = [
   { href: "/today", label: "今日待办", icon: "📋" },
   { href: "/tasks", label: "全部任务", icon: "✅" },
   { href: "/categories", label: "分类视图", icon: "📁" },
+  { href: "/members", label: "会员管理", icon: "🪪" },
   { href: "/ledger", label: "家庭台账", icon: "📒" },
   { href: "/recurring", label: "周期任务", icon: "🔄" },
   { href: "/calendar", label: "日历视图", icon: "📅" },

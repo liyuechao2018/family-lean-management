@@ -128,10 +128,12 @@ export default function CategoryBoard({
   categories: initialCategories,
   customFields: initialCustomFields,
   settings: initialSettings,
+  singleMode = false,
 }: {
   categories: CategoryWithTasks[];
   customFields: CustomField[];
   settings: Record<string, string | null>;
+  singleMode?: boolean;
 }) {
   const router = useRouter();
   const [categories, setCategories] = useState<CategoryWithTasks[]>(initialCategories);
@@ -657,12 +659,14 @@ export default function CategoryBoard({
 
       {/* Toolbar */}
       <div className="flex items-center gap-3">
+        {!singleMode && (
         <button
           onClick={() => setAddingCat(!addingCat)}
           className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
         >
           <span className="text-lg leading-none">+</span> 新建分类
         </button>
+        )}
         <button
           onClick={() => setShowFieldPanel(true)}
           className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
@@ -759,6 +763,7 @@ export default function CategoryBoard({
                 onComplete={handleComplete}
                 onOpenRecurring={openRecurringModal}
                 onTaskOpen={handleTaskOpen}
+                singleMode={singleMode}
               />
             );
           })}
@@ -1099,6 +1104,7 @@ function CategoryBody({
   onComplete,
   onOpenRecurring,
   onTaskOpen,
+  singleMode,
 }: {
   category: CategoryWithTasks;
   columns: ColumnDef[];
@@ -1124,6 +1130,7 @@ function CategoryBody({
   onComplete: (taskId: string, currentStatus: TaskStatus) => void;
   onOpenRecurring: (task: TaskWithCategory) => void;
   onTaskOpen: (taskId: string) => void;
+  singleMode?: boolean;
 }) {
   const [collapsed, setCollapsed] = useState(false);
   const isDragging = catDraggingId === category.id;
@@ -1159,7 +1166,7 @@ function CategoryBody({
               >
                 {collapsed ? "▶" : "▼"}
               </button>
-              <span className="text-gray-400 cursor-move">☰</span>
+              {!singleMode && <span className="text-gray-400 cursor-move">☰</span>}
               {category.color && (
                 <span
                   className="w-3 h-3 rounded-full flex-shrink-0"
@@ -1173,6 +1180,7 @@ function CategoryBody({
                 {category._count.tasks}
               </span>
             </div>
+            {!singleMode && (
             <button
               onClick={() => onDeleteCategory(category.id)}
               className="text-gray-400 hover:text-red-500 text-xs px-2 py-1 rounded hover:bg-red-50 transition-colors"
@@ -1180,6 +1188,7 @@ function CategoryBody({
             >
               🗑
             </button>
+            )}
           </div>
         </td>
       </tr>

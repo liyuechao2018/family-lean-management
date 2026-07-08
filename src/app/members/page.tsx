@@ -3,16 +3,16 @@ import CategoryBoard from "@/components/CategoryBoard";
 
 export const dynamic = "force-dynamic";
 
-async function getCategoriesWithTasks() {
+async function getStandaloneCategories() {
   const categories = await prisma.category.findMany({
-    where: { standalone: false },
+    where: { standalone: true },
     orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
     include: {
       _count: { select: { tasks: true } },
       parent: true,
       tasks: {
         where: {
-          parentId: null, // 只获取顶层任务，子任务通过 include children 获取
+          parentId: null,
         },
         orderBy: [{ dueDate: "asc" }, { createdAt: "desc" }],
         include: {
@@ -53,18 +53,27 @@ async function getSettings() {
   return Object.fromEntries(settings.map((s) => [s.key, s.value]));
 }
 
-export default async function CategoriesPage() {
+export default async function MembersPage() {
   const [categories, customFields, settings] = await Promise.all([
-    getCategoriesWithTasks(),
+    getStandaloneCategories(),
     getCustomFields(),
     getSettings(),
   ]);
 
   return (
-    <CategoryBoard
-      categories={categories}
-      customFields={customFields}
-      settings={settings}
-    />
+    <div className="space-y-4">
+      <div>
+        <h1 className="text-2xl font-bold text-gray-800">会员管理</h1>
+        <p className="text-sm text-gray-500 mt-1">
+          家庭层面的会员、订阅与权益管理
+        </p>
+      </div>
+      <CategoryBoard
+        categories={categories}
+        customFields={customFields}
+        settings={settings}
+        singleMode
+      />
+    </div>
   );
 }
