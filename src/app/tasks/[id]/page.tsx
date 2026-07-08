@@ -3,6 +3,7 @@ import { TaskStatus } from "@/generated/prisma";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import TaskActions from "@/components/TaskActions";
+import TaskDescriptionEditor from "@/components/TaskDescriptionEditor";
 
 export const dynamic = "force-dynamic";
 
@@ -83,6 +84,14 @@ export default async function TaskDetailPage({
 
         {/* 操作按钮 */}
         <TaskActions taskId={task.id} status={task.status} />
+      </div>
+
+      {/* 富文本描述编辑器 */}
+      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-4">
+        <TaskDescriptionEditor
+          taskId={task.id}
+          initialDescription={task.description || ""}
+        />
       </div>
 
       {/* 详细信息 */}

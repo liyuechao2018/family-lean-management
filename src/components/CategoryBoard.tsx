@@ -570,6 +570,10 @@ export default function CategoryBoard({
     setShowRecurringModal(true);
   }
 
+  const handleTaskOpen = useCallback((taskId: string) => {
+    router.push(`/tasks/${taskId}`);
+  }, [router]);
+
   async function handleSaveRecurring() {
     if (!recurringTaskId) return;
     setSavingRecurring(true);
@@ -754,6 +758,7 @@ export default function CategoryBoard({
                 colWidthStyle={colWidthStyle}
                 onComplete={handleComplete}
                 onOpenRecurring={openRecurringModal}
+                onTaskOpen={handleTaskOpen}
               />
             );
           })}
@@ -764,6 +769,7 @@ export default function CategoryBoard({
             columns={visibleColumns}
             colWidthStyle={colWidthStyle}
             onComplete={handleComplete}
+            onTaskOpen={handleTaskOpen}
             fieldValues={fieldValues}
             editing={editing}
             editValue={editValue}
@@ -1092,6 +1098,7 @@ function CategoryBody({
   colWidthStyle,
   onComplete,
   onOpenRecurring,
+  onTaskOpen,
 }: {
   category: CategoryWithTasks;
   columns: ColumnDef[];
@@ -1116,6 +1123,7 @@ function CategoryBody({
   colWidthStyle: (w: number) => React.CSSProperties;
   onComplete: (taskId: string, currentStatus: TaskStatus) => void;
   onOpenRecurring: (task: TaskWithCategory) => void;
+  onTaskOpen: (taskId: string) => void;
 }) {
   const [collapsed, setCollapsed] = useState(false);
   const isDragging = catDraggingId === category.id;
@@ -1209,6 +1217,7 @@ function CategoryBody({
               colWidthStyle={colWidthStyle}
               onComplete={onComplete}
               onOpenRecurring={onOpenRecurring}
+              onTaskOpen={onTaskOpen}
             />
           ))}
         </>
@@ -1239,6 +1248,7 @@ function TaskRow({
   colWidthStyle,
   onComplete,
   onOpenRecurring,
+  onTaskOpen,
 }: {
   task: TaskWithCategory;
   depth: number;
@@ -1259,6 +1269,7 @@ function TaskRow({
   colWidthStyle: (w: number) => React.CSSProperties;
   onComplete: (taskId: string, currentStatus: TaskStatus) => void;
   onOpenRecurring: (task: TaskWithCategory) => void;
+  onTaskOpen: (taskId: string) => void;
 }) {
   const overdue = isOverdue(task.dueDate, task.status);
   const isDragging = draggingId === task.id;
@@ -1269,7 +1280,7 @@ function TaskRow({
   return (
     <>
       <tr
-        className={`border-b border-gray-100 transition-colors ${
+        className={`border-b border-gray-100 transition-colors cursor-pointer ${
           isDragging ? "opacity-40" : ""
         } ${isDragOver ? "bg-blue-50/50 ring-1 ring-inset ring-blue-200" : ""} ${
           depth > 0 ? "bg-gray-50/30" : ""
@@ -1277,6 +1288,11 @@ function TaskRow({
           isCompleted ? "bg-gray-50/50" : "hover:bg-gray-50/60"
         }`}
         draggable
+        onDoubleClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          onTaskOpen(task.id);
+        }}
         onDragStart={() => onSetDragging(task.id)}
         onDragOver={(e) => {
           e.preventDefault();
@@ -1595,6 +1611,7 @@ function TaskRow({
           colWidthStyle={colWidthStyle}
           onComplete={onComplete}
           onOpenRecurring={onOpenRecurring}
+          onTaskOpen={onTaskOpen}
         />
       ))}
     </>
@@ -1615,6 +1632,7 @@ function CompletedSection({
   onEditSave,
   onEditStart,
   onOpenRecurring,
+  onTaskOpen,
 }: {
   tasks: TaskWithCategory[];
   columns: ColumnDef[];
@@ -1627,6 +1645,7 @@ function CompletedSection({
   onEditSave: () => void;
   onEditStart: (taskId: string, field: FieldKey, value: string) => void;
   onOpenRecurring: (task: TaskWithCategory) => void;
+  onTaskOpen: (taskId: string) => void;
 }) {
   const [collapsed, setCollapsed] = useState(false);
   if (tasks.length === 0) return null;
@@ -1675,6 +1694,7 @@ function CompletedSection({
           colWidthStyle={colWidthStyle}
           onComplete={onComplete}
           onOpenRecurring={onOpenRecurring}
+          onTaskOpen={onTaskOpen}
         />
       ))}
     </tbody>
