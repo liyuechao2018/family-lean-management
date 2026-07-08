@@ -1276,12 +1276,11 @@ function TaskRow({
   const isDragOver = dragOverId === task.id;
   const isEditingTitle = editing?.taskId === task.id && editing?.field === "title";
   const isCompleted = task.status === "COMPLETED";
-  const clickTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   return (
     <>
       <tr
-        className={`border-b border-gray-100 transition-colors cursor-pointer ${
+        className={`border-b border-gray-100 transition-colors ${
           isDragging ? "opacity-40" : ""
         } ${isDragOver ? "bg-blue-50/50 ring-1 ring-inset ring-blue-200" : ""} ${
           depth > 0 ? "bg-gray-50/30" : ""
@@ -1289,11 +1288,6 @@ function TaskRow({
           isCompleted ? "bg-gray-50/50" : "hover:bg-gray-50/60"
         }`}
         draggable
-        onDoubleClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          onTaskOpen(task.id);
-        }}
         onDragStart={() => onSetDragging(task.id)}
         onDragOver={(e) => {
           e.preventDefault();
@@ -1470,26 +1464,24 @@ function TaskRow({
                       className="flex-1 px-1 py-0.5 text-sm border border-blue-400 rounded bg-blue-50 focus:outline-none focus:ring-1 focus:ring-blue-400"
                     />
                   ) : (
-                    <span
-                      onClick={() => {
-                        if (clickTimer.current) clearTimeout(clickTimer.current);
-                        clickTimer.current = setTimeout(() => {
-                          onEditStart(task.id, "title", task.title);
-                        }, 300);
-                      }}
-                      onDoubleClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        if (clickTimer.current) clearTimeout(clickTimer.current);
-                        onTaskOpen(task.id);
-                      }}
-                      className={`flex-1 text-left text-sm font-medium cursor-pointer select-none truncate ${
+                    <>
+                    <button
+                      onClick={() => onEditStart(task.id, "title", task.title)}
+                      className={`flex-1 text-left text-sm font-medium cursor-text truncate ${
                         isCompleted ? "text-gray-400 line-through" : "text-gray-900 hover:text-blue-600"
                       }`}
-                      title="双击查看详情，单击编辑"
+                      title={task.title}
                     >
                       {task.title}
-                    </span>
+                    </button>
+                    <button
+                      onClick={() => onTaskOpen(task.id)}
+                      className="flex-shrink-0 text-gray-300 hover:text-blue-500 transition-colors"
+                      title="编辑此任务"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                    </button>
+                    </>
                   )}
                   {task.recurringTask && (
                     <button
@@ -1519,9 +1511,7 @@ function TaskRow({
               <td key={col.id} className="px-3 py-2" style={colWidthStyle(col.width)}>
                 <button
                   onClick={() => col.editable && onEditStart(task.id, "status", task.status)}
-                  onDoubleClick={(e) => { e.preventDefault(); e.stopPropagation(); onTaskOpen(task.id); }}
-                  title="双击查看详情"
-                  className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${statusColors[task.status]} cursor-pointer`}
+                  className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${statusColors[task.status]} cursor-text`}
                 >
                   {statusLabels[task.status]}
                 </button>
@@ -1549,9 +1539,7 @@ function TaskRow({
               <td key={col.id} className="px-3 py-2" style={colWidthStyle(col.width)}>
                 <button
                   onClick={() => col.editable && onEditStart(task.id, "dueDate", task.dueDate ? formatDate(task.dueDate) : "")}
-                  onDoubleClick={(e) => { e.preventDefault(); e.stopPropagation(); onTaskOpen(task.id); }}
-                  title="双击查看详情"
-                  className={`text-xs cursor-pointer ${overdueClass}`}
+                  className={`text-xs cursor-text ${overdueClass}`}
                 >
                   {task.dueDate ? formatDate(task.dueDate) : "—"}
                 </button>
